@@ -20,14 +20,17 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; }
-        h1 { font-size: clamp(3.5rem, 8vw, 6rem); margin-bottom: 2rem; }
+        h1 { font-size: clamp(2.75rem, 6vw, 4.5rem); margin-bottom: 2rem; }
         h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
 
         nav { position: fixed; top: 0; width: 100%; background: rgba(250, 248, 245, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); z-index: 1000; padding: 1.5rem 0; }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--text-primary); text-decoration: none; font-style: italic; }
-        .nav-cta a { padding: 0.75rem 2rem; background: var(--primary); color: var(--cream); text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; }
-        .nav-cta a:hover { background: var(--charcoal); transform: translateY(-1px); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; color: var(--text-primary); text-decoration: none; font-style: italic; }
+        .nav-cta { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-cta a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 0.95rem; transition: color 0.3s ease; }
+        .nav-cta a:hover { color: var(--primary); }
+        .nav-cta .btn-nav { padding: 0.75rem 2rem; background: var(--primary); color: var(--cream); border-radius: 8px; }
+        .nav-cta .btn-nav:hover { background: var(--charcoal); transform: translateY(-1px); color: var(--cream); }
 
         .hero { min-height: 95vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; }
         .hero-container { max-width: 1200px; margin: 0 auto; }
@@ -48,11 +51,6 @@
         .benefit-card li { padding: 0.75rem 0; padding-left: 1.5rem; position: relative; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; }
         .benefit-card li:before { content: "✓"; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
 
-        .social-proof { padding: 6rem 3rem; background: var(--cream); }
-        .testimonial { max-width: 800px; margin: 0 auto; text-align: center; }
-        .testimonial-quote { font-family: 'Cormorant Garamond', serif; font-size: 2.25rem; font-style: italic; line-height: 1.5; margin-bottom: 2rem; color: var(--text-primary); }
-        .testimonial-author { font-size: 1.1rem; color: var(--text-secondary); font-weight: 500; }
-
         .final-cta { padding: 8rem 3rem; background: linear-gradient(135deg, var(--charcoal) 0%, var(--deep-charcoal) 100%); text-align: center; color: var(--cream); }
         .final-cta h2 { color: var(--cream); margin-bottom: 2rem; }
         .final-cta p { font-size: 1.25rem; color: rgba(250, 248, 245, 0.8); margin-bottom: 3rem; font-weight: 300; }
@@ -66,10 +64,10 @@
         @media (max-width: 768px) {
             .nav-container { padding: 0 2rem; }
             .hero { padding: 7rem 2rem 3rem; }
-            h1 { font-size: 3rem; }
-            .hero-description { font-size: 1.5rem; }
+            h1 { font-size: 2.5rem; }
+            .hero-description { font-size: 1.4rem; }
             .benefits-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .testimonial-quote { font-size: 1.75rem; }
+            .nav-cta { gap: 1rem; }
         }
     </style>
 </head>
@@ -77,7 +75,10 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">Josefin</a>
-            <div class="nav-cta"><a href="#join">Join the Test</a></div>
+            <div class="nav-cta">
+                <a href="https://jobs.ashbyhq.com/josefin" target="_blank">Careers</a>
+                <a href="#join" class="btn-nav">Join the Test</a>
+            </div>
         </div>
     </nav>
 
@@ -88,7 +89,7 @@
                 <h1>Your household, running on autopilot.</h1>
                 <p class="hero-description">School emails handled. Calendars synced. Family coordinated. Nothing missed.</p>
                 <p class="hero-tagline">You only hear from us when something needs you.</p>
-                <a href="#join" class="btn-primary">Join the 8-Week Test →</a>
+                <a href="#join" class="btn-primary">Join the Beta Test →</a>
             </div>
         </div>
     </section>
@@ -131,25 +132,16 @@
         </div>
     </section>
 
-    <section class="social-proof">
-        <div class="section-container">
-            <div class="testimonial">
-                <p class="testimonial-quote">"I stopped checking the school emails. Josefin just handles it!"</p>
-                <p class="testimonial-author">— Christina, London mum of 2</p>
-            </div>
-        </div>
-    </section>
-
     <section class="final-cta" id="join">
         <div class="section-container">
             <h2>Stop managing. Start living.</h2>
-            <p>Join 15 families testing Josefin for 8 weeks.</p>
-            <a href="mailto:hello@josefin.ai?subject=Join%20Josefin%20Test&body=Name:%0D%0AEmail:%0D%0AWhatsApp:%0D%0AChildren's%20ages:%0D%0AWho%20helps%20with%20childcare:" class="btn-primary">Join the Test →</a>
+            <p>Join the families currently testing Josefin.</p>
+            <a href="mailto:hello@josefin.ai?subject=Join%20Josefin%20Beta&body=Name:%0D%0AEmail:%0D%0AWhatsApp:%0D%0AChildren's%20ages:%0D%0AWho%20helps%20with%20childcare:" class="btn-primary">Join the Test →</a>
         </div>
     </section>
 
     <footer>
-        <p>© 2025 Your Village AI · Building in London</p>
+        <p>© 2025 Josefin · Building in London</p>
         <p style="margin-top: 1rem;"><a href="mailto:hello@josefin.ai">Contact</a></p>
     </footer>
 </body>
