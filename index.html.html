@@ -59,9 +59,9 @@
 
         footer { background: #0d0d0d; color: rgba(250, 248, 245, 0.7); padding: 3rem; text-align: center; }
         footer p { font-size: 0.875rem; }
-        footer a { color: var(--accent); text-decoration: none; margin: 0 1rem; }
+        footer a { color: var(--accent); text-decoration: none; margin: 0 1rem; cursor: pointer; }
+        footer a:hover { color: var(--cream); }
 
-        /* Modal Styles */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
         .modal.active { display: flex; align-items: center; justify-content: center; }
         .modal-content { background: white; border-radius: 16px; padding: 3rem; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -165,14 +165,12 @@
 
     <footer>
         <p>© 2025 Josefin · Building in London</p>
-        <p style="margin-top: 1rem;"><a onclick="openContactModal()" style="cursor: pointer;">Contact</a></p>
+        <p style="margin-top: 1rem;"><a onclick="openContactModal()">Contact</a></p>
     </footer>
 
-    <!-- Join Test Modal -->
     <div id="joinModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeJoinModal()">&times;</span>
-            
             <div id="joinForm">
                 <h2 class="modal-title">Join the Test</h2>
                 <form onsubmit="submitJoinForm(event)">
@@ -207,7 +205,6 @@
                     <button type="submit" class="btn-submit">Submit</button>
                 </form>
             </div>
-
             <div id="joinSuccess" class="success-message">
                 <h3>✓ Thank you!</h3>
                 <p>Your response has been recorded.</p>
@@ -215,11 +212,9 @@
         </div>
     </div>
 
-    <!-- Careers Modal -->
     <div id="careersModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeCareersModal()">&times;</span>
-            
             <div id="careersMessage">
                 <h2 class="modal-title">Careers</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
@@ -229,11 +224,9 @@
         </div>
     </div>
 
-    <!-- Contact Modal -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeContactModal()">&times;</span>
-            
             <div id="contactMessage">
                 <h2 class="modal-title">Contact</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
@@ -243,8 +236,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Modal Functions
+    <script>
         function openJoinModal() {
             document.getElementById('joinModal').classList.add('active');
             document.getElementById('joinForm').style.display = 'block';
@@ -271,14 +263,12 @@
             document.getElementById('contactModal').classList.remove('active');
         }
 
-        // Close modals when clicking outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.classList.remove('active');
             }
         }
 
-        // Submit Join Form
         async function submitJoinForm(e) {
             e.preventDefault();
             
@@ -292,7 +282,6 @@
                 timestamp: new Date().toISOString()
             };
 
-            // Replace with your Google Apps Script Web App URL
             const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
 
             try {
@@ -304,13 +293,18 @@
                     }
                 });
 
-                // Show success message
                 document.getElementById('joinForm').style.display = 'none';
                 document.getElementById('joinSuccess').classList.add('active');
-
-                // Reset form
                 e.target.reset();
 
-                // Close modal after 2 seconds
                 setTimeout(() => {
-                    closeJoinModal
+                    closeJoinModal();
+                }, 2000);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting your response. Please try again or email hello@josefin.ai');
+            }
+        }
+    </script>
+</body>
+</html>
