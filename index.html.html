@@ -24,26 +24,26 @@
         h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
 
         nav { position: fixed; top: 0; width: 100%; background: rgba(250, 248, 245, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); z-index: 1000; padding: 1.5rem 0; }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; color: var(--text-primary); text-decoration: none; font-style: italic; }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--text-primary); text-decoration: none; font-style: italic; }
         .nav-cta { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-cta a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 0.95rem; transition: color 0.3s ease; }
+        .nav-cta a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 0.95rem; transition: color 0.3s ease; cursor: pointer; }
         .nav-cta a:hover { color: var(--primary); }
         .nav-cta .btn-nav { padding: 0.75rem 2rem; background: var(--primary); color: var(--cream); border-radius: 8px; }
         .nav-cta .btn-nav:hover { background: var(--charcoal); transform: translateY(-1px); color: var(--cream); }
 
         .hero { min-height: 95vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; }
-        .hero-container { max-width: 1200px; margin: 0 auto; }
+        .hero-container { max-width: 1400px; margin: 0 auto; }
         .hero-content { max-width: 900px; }
         .hero-label { font-size: 0.875rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--primary); font-weight: 600; margin-bottom: 1.5rem; }
         .hero-description { font-size: 1.75rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; font-weight: 300; max-width: 800px; }
         .hero-tagline { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; font-style: italic; font-weight: 300; }
-        .btn-primary { padding: 1.5rem 3.5rem; background: var(--primary); color: var(--cream); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; display: inline-block; border: 2px solid var(--primary); }
+        .btn-primary { padding: 1.5rem 3.5rem; background: var(--primary); color: var(--cream); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; display: inline-block; border: 2px solid var(--primary); cursor: pointer; }
         .btn-primary:hover { background: var(--charcoal); border-color: var(--charcoal); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
 
         .benefits-section { padding: 8rem 3rem; background: var(--warm-grey); }
-        .section-container { max-width: 1200px; margin: 0 auto; }
-        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 4rem; margin-top: 4rem; }
+        .section-container { max-width: 1400px; margin: 0 auto; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin-top: 4rem; max-width: 1100px; margin-left: auto; margin-right: auto; }
         .benefit-card { background: white; padding: 3rem; border-radius: 16px; border: 1px solid var(--border-subtle); }
         .benefit-icon { font-size: 3rem; margin-bottom: 1.5rem; }
         .benefit-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary); }
@@ -61,13 +61,37 @@
         footer p { font-size: 0.875rem; }
         footer a { color: var(--accent); text-decoration: none; margin: 0 1rem; }
 
-        @media (max-width: 768px) {
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 16px; padding: 3rem; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2rem; font-weight: 300; color: var(--text-secondary); cursor: pointer; transition: color 0.3s; }
+        .modal-close:hover { color: var(--charcoal); }
+        .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--primary); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); font-size: 0.95rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-family: 'Lato', sans-serif; font-size: 0.95rem; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .checkbox-group input[type="checkbox"] { margin-top: 0.25rem; width: 18px; height: 18px; cursor: pointer; }
+        .checkbox-group label { font-weight: 400; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; }
+        .btn-submit { width: 100%; padding: 1rem; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { background: var(--charcoal); transform: translateY(-1px); }
+        .btn-submit:disabled { background: var(--text-secondary); cursor: not-allowed; }
+        .success-message { display: none; text-align: center; padding: 2rem; }
+        .success-message.active { display: block; }
+        .success-message h3 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; }
+        .success-message p { color: var(--text-secondary); font-size: 1.1rem; }
+
+        @media (max-width: 968px) {
+            .benefits-grid { grid-template-columns: 1fr; gap: 3rem; }
             .nav-container { padding: 0 2rem; }
             .hero { padding: 7rem 2rem 3rem; }
             h1 { font-size: 2.5rem; }
             .hero-description { font-size: 1.4rem; }
-            .benefits-grid { grid-template-columns: 1fr; gap: 3rem; }
             .nav-cta { gap: 1rem; }
+            .modal-content { padding: 2rem; }
         }
     </style>
 </head>
@@ -76,8 +100,8 @@
         <div class="nav-container">
             <a href="#" class="logo">Josefin</a>
             <div class="nav-cta">
-                <a href="https://jobs.ashbyhq.com/josefin" target="_blank">Careers</a>
-                <a href="#join" class="btn-nav">Join the Test</a>
+                <a onclick="openCareersModal()">Careers</a>
+                <a onclick="openJoinModal()" class="btn-nav">Join the Test</a>
             </div>
         </div>
     </nav>
@@ -85,11 +109,11 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <p class="hero-label">For Busy Parents</p>
+                <p class="hero-label">For the Busy Parent</p>
                 <h1>Your household, running on autopilot.</h1>
                 <p class="hero-description">School emails handled. Calendars synced. Family coordinated. Nothing missed.</p>
                 <p class="hero-tagline">You only hear from us when something needs you.</p>
-                <a href="#join" class="btn-primary">Join the Beta Test →</a>
+                <a onclick="openJoinModal()" class="btn-primary">Join the Beta Test →</a>
             </div>
         </div>
     </section>
@@ -105,7 +129,6 @@
                         <li>Extracts deadlines, payments, events</li>
                         <li>Adds to calendar automatically</li>
                         <li>Reminds you when relevant</li>
-                        <li>You never forward, copy, or paste</li>
                     </ul>
                 </div>
                 <div class="benefit-card">
@@ -136,13 +159,158 @@
         <div class="section-container">
             <h2>Stop managing. Start living.</h2>
             <p>Join the families currently testing Josefin.</p>
-            <a href="mailto:hello@josefin.ai?subject=Join%20Josefin%20Beta&body=Name:%0D%0AEmail:%0D%0AWhatsApp:%0D%0AChildren's%20ages:%0D%0AWho%20helps%20with%20childcare:" class="btn-primary">Join the Test →</a>
+            <a onclick="openJoinModal()" class="btn-primary">Join the Test →</a>
         </div>
     </section>
 
     <footer>
         <p>© 2025 Josefin · Building in London</p>
-        <p style="margin-top: 1rem;"><a href="mailto:hello@josefin.ai">Contact</a></p>
+        <p style="margin-top: 1rem;"><a onclick="openContactModal()" style="cursor: pointer;">Contact</a></p>
     </footer>
-</body>
-</html>
+
+    <!-- Join Test Modal -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeJoinModal()">&times;</span>
+            
+            <div id="joinForm">
+                <h2 class="modal-title">Join the Test</h2>
+                <form onsubmit="submitJoinForm(event)">
+                    <div class="form-group">
+                        <label for="join-name">Name</label>
+                        <input type="text" id="join-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-email">Email Address</label>
+                        <input type="email" id="join-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-location">Location</label>
+                        <textarea id="join-location" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-children">How many children do you have?</label>
+                        <textarea id="join-children" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-ages">What are their ages?</label>
+                        <textarea id="join-ages" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-manager">Who manages childcare currently?</label>
+                        <textarea id="join-manager" required></textarea>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="join-commitment" required>
+                        <label for="join-commitment">By signing up to this test, I am committing to a minimum 1 month pilot that will help to simplify my childcare coordination.</label>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
+            </div>
+
+            <div id="joinSuccess" class="success-message">
+                <h3>✓ Thank you!</h3>
+                <p>Your response has been recorded.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Careers Modal -->
+    <div id="careersModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCareersModal()">&times;</span>
+            
+            <div id="careersMessage">
+                <h2 class="modal-title">Careers</h2>
+                <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                    Like the sound of what we're building? Please email your CV to <a href="mailto:hello@josefin.ai" style="color: var(--primary); text-decoration: none; font-weight: 600;">hello@josefin.ai</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeContactModal()">&times;</span>
+            
+            <div id="contactMessage">
+                <h2 class="modal-title">Contact</h2>
+                <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                    Please direct all enquiries to <a href="mailto:hello@josefin.ai" style="color: var(--primary); text-decoration: none; font-weight: 600;">hello@josefin.ai</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Modal Functions
+        function openJoinModal() {
+            document.getElementById('joinModal').classList.add('active');
+            document.getElementById('joinForm').style.display = 'block';
+            document.getElementById('joinSuccess').classList.remove('active');
+        }
+
+        function closeJoinModal() {
+            document.getElementById('joinModal').classList.remove('active');
+        }
+
+        function openCareersModal() {
+            document.getElementById('careersModal').classList.add('active');
+        }
+
+        function closeCareersModal() {
+            document.getElementById('careersModal').classList.remove('active');
+        }
+
+        function openContactModal() {
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Submit Join Form
+        async function submitJoinForm(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('join-name').value,
+                email: document.getElementById('join-email').value,
+                location: document.getElementById('join-location').value,
+                children: document.getElementById('join-children').value,
+                ages: document.getElementById('join-ages').value,
+                manager: document.getElementById('join-manager').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Replace with your Google Apps Script Web App URL
+            const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                // Show success message
+                document.getElementById('joinForm').style.display = 'none';
+                document.getElementById('joinSuccess').classList.add('active');
+
+                // Reset form
+                e.target.reset();
+
+                // Close modal after 2 seconds
+                setTimeout(() => {
+                    closeJoinModal
