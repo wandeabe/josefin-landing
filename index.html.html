@@ -33,7 +33,7 @@
         .nav-cta .btn-nav { padding: 0.75rem 2rem; background: var(--primary); color: var(--cream); border-radius: 8px; }
         .nav-cta .btn-nav:hover { background: var(--charcoal); transform: translateY(-1px); color: var(--cream); }
 
-        /* Updated Hero with Animation */
+        /* Updated Hero with Train Animation */
         .hero { min-height: 95vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; }
         .hero-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .hero-content { max-width: 600px; }
@@ -44,44 +44,85 @@
         .btn-primary { padding: 1.5rem 3.5rem; background: var(--primary); color: var(--cream); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; display: inline-block; border: 2px solid var(--primary); cursor: pointer; }
         .btn-primary:hover { background: var(--charcoal); border-color: var(--charcoal); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
 
-        /* Chaos to Calm Animation */
+        /* Yarn to Train Animation */
         .hero-animation { display: flex; align-items: center; justify-content: center; min-height: 500px; }
         .animation-stage { position: relative; width: 100%; max-width: 450px; height: 500px; }
-        .animation-phase { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s ease; }
+        .animation-phase { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 1.5s ease; }
         .animation-phase.active { opacity: 1; }
         
-        /* Phase 1: Chaos */
-        .chaos-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; }
-        .chaos-icon { font-size: 3rem; animation: chaosFloat 2s ease-in-out infinite; }
-        .chaos-icon:nth-child(1) { animation-delay: 0s; }
-        .chaos-icon:nth-child(2) { animation-delay: 0.3s; }
-        .chaos-icon:nth-child(3) { animation-delay: 0.6s; }
-        .chaos-icon:nth-child(4) { animation-delay: 0.9s; }
-        .stressed-brain { font-size: 5rem; margin-top: 2rem; animation: shake 0.5s ease-in-out infinite; }
-        @keyframes chaosFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        @keyframes shake { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
-        
-        /* Phase 2: Josefin Solution */
-        .solution-content { text-align: center; }
-        .solution-logo { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-style: italic; color: var(--primary); margin-bottom: 2rem; }
-        .solution-items { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
-        .solution-item { font-size: 2rem; opacity: 0; animation: fadeInItem 0.5s ease forwards; }
-        .solution-item:nth-child(1) { animation-delay: 0.5s; }
-        .solution-item:nth-child(2) { animation-delay: 1s; }
-        .solution-item:nth-child(3) { animation-delay: 1.5s; }
-        .calm-brain { font-size: 5rem; margin-top: 2rem; animation: breathe 3s ease-in-out infinite; }
-        @keyframes fadeInItem { to { opacity: 1; } }
-        @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        /* Knotted Yarn Ball */
+        .yarn-container { position: relative; width: 300px; height: 300px; }
+        .yarn-ball {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #8b4f47 0%, #6d3f37 50%, #8b4f47 100%);
+            border-radius: 45% 55% 50% 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.3), 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .yarn-strand {
+            position: absolute;
+            height: 3px;
+            background: var(--primary);
+            transform-origin: left center;
+            opacity: 0.7;
+        }
+        .yarn-strand:nth-child(1) { width: 150px; top: 30%; left: 50%; transform: rotate(45deg); }
+        .yarn-strand:nth-child(2) { width: 120px; top: 45%; left: 40%; transform: rotate(-30deg); }
+        .yarn-strand:nth-child(3) { width: 180px; top: 60%; left: 35%; transform: rotate(15deg); }
+        .yarn-strand:nth-child(4) { width: 140px; top: 70%; left: 55%; transform: rotate(-45deg); }
+        .needle {
+            position: absolute;
+            width: 4px;
+            height: 80px;
+            background: linear-gradient(to bottom, #c9c9c9 0%, #888 100%);
+            border-radius: 2px 2px 0 0;
+        }
+        .needle:nth-child(5) { top: 10%; left: 60%; transform: rotate(30deg); }
+        .needle:nth-child(6) { top: 20%; left: 30%; transform: rotate(-45deg); }
+        .needle:nth-child(7) { bottom: 15%; right: 25%; transform: rotate(60deg); }
+
+        /* Train System */
+        .train-container { position: relative; width: 350px; height: 350px; }
+        .train-line {
+            position: absolute;
+            stroke: #999;
+            stroke-width: 4;
+            fill: none;
+            stroke-linecap: round;
+        }
+        .train-station {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #666;
+            border-radius: 50%;
+            border: 3px solid #999;
+        }
+        .train-light {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--primary);
+            animation: trainMove 4s linear infinite;
+        }
+        @keyframes trainMove {
+            0% { offset-distance: 0%; opacity: 1; }
+            95% { opacity: 1; }
+            100% { offset-distance: 100%; opacity: 0; }
+        }
 
         .integration-section { 
             padding: 5rem 3rem; 
             background: #4a2f2a;
             text-align: center;
         }
-        .integration-content { 
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .integration-content { max-width: 900px; margin: 0 auto; }
         .integration-text-box {
             background: white;
             border: 2px solid var(--border-subtle);
@@ -119,22 +160,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
         }
-        .icon-circle svg {
-            width: 50px;
-            height: 50px;
-        }
-        .icon-circle:hover {
-            transform: translateY(-5px);
-        }
-        .icon-label {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #ffffff;
-        }
+        .icon-circle svg { width: 50px; height: 50px; }
+        .icon-circle:hover { transform: translateY(-5px); }
+        .icon-label { font-size: 0.95rem; font-weight: 500; color: #ffffff; }
 
         .section-container { max-width: 1400px; margin: 0 auto; }
 
-        /* Visual USP Sections */
         .usp-section { padding: 6rem 3rem; }
         .usp-section:nth-child(even) { background: var(--warm-grey); }
         .usp-section:nth-child(odd) { background: var(--cream); }
@@ -144,16 +175,10 @@
         .usp-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
         .usp-description { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; max-width: 700px; margin: 0 auto; }
 
-        /* Passive Capture - Week Calendar View */
+        /* Passive Capture - Extended Calendar Events */
         .capture-visual { display: grid; grid-template-columns: 45% 55%; gap: 3rem; margin-top: 3rem; align-items: start; }
         .email-inbox { background: #f8f9fa; border-radius: 12px; padding: 1.5rem; border: 1px solid #e9ecef; }
-        .email-item { 
-            background: white; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin-bottom: 0.75rem; 
-            border-left: 3px solid var(--primary);
-        }
+        .email-item { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; border-left: 3px solid var(--primary); }
         .email-subject { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
         .email-preview { font-size: 0.8rem; color: var(--text-secondary); }
         
@@ -208,25 +233,30 @@
             opacity: 0;
             animation: eventAppear 0.5s ease forwards;
         }
+        /* Extended: Emma's Party - 2 hours (12pm-2pm) = 33% height */
         .event-birthday { 
             background: #fce4ec; 
             color: #c2185b; 
-            top: 28%;
-            height: 30%;
+            top: 33%;
+            height: 33%;
             animation-delay: 0.8s; 
         }
+        /* Extended: Dress Up Day - 6 hours (9am-3pm) = full school day */
         .event-dress { 
             background: #fff3e0; 
             color: #f57c00; 
-            top: 10%;
-            height: 15%;
-            animation-delay: 1.6s; 
+            top: 0%;
+            height: 100%;
+            animation-delay: 1.6s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .event-payment { 
             background: #e3f2fd; 
             color: #1976d2; 
-            top: 45%;
-            height: 15%;
+            top: 50%;
+            height: 16%;
             animation-delay: 2.4s; 
         }
         @keyframes eventAppear {
@@ -234,7 +264,7 @@
             from { opacity: 0; transform: scale(0.8); }
         }
 
-        /* Smart Coordination Visual */
+        /* Smart Coordination - Updated */
         .coordination-visual { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -304,6 +334,11 @@
             align-items: flex-start;
             gap: 0.5rem;
         }
+        .notification-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
         .whatsapp-icon {
             width: 18px;
             height: 18px;
@@ -311,7 +346,6 @@
             margin-top: 2px;
         }
 
-        /* Proactive Intelligence Visual */
         .intelligence-visual { max-width: 400px; margin: 3rem auto 0; }
         .summary-container { background: #e5ddd5; border-radius: 16px; }
         .summary-header { background: #075e54; padding: 1rem 1.5rem; border-radius: 16px 16px 0 0; color: white; }
@@ -393,24 +427,48 @@
             </div>
             <div class="hero-animation">
                 <div class="animation-stage">
-                    <div class="animation-phase active" id="chaos-phase">
-                        <div class="chaos-items">
-                            <div class="chaos-icon">📧</div>
-                            <div class="chaos-icon">💬</div>
-                            <div class="chaos-icon">📝</div>
-                            <div class="chaos-icon">🎈</div>
+                    <!-- Phase 1: Knotted Yarn Ball -->
+                    <div class="animation-phase active" id="yarn-phase">
+                        <div class="yarn-container">
+                            <div class="yarn-ball"></div>
+                            <div class="yarn-strand"></div>
+                            <div class="yarn-strand"></div>
+                            <div class="yarn-strand"></div>
+                            <div class="yarn-strand"></div>
+                            <div class="needle"></div>
+                            <div class="needle"></div>
+                            <div class="needle"></div>
                         </div>
-                        <div class="stressed-brain">🤯</div>
                     </div>
-                    <div class="animation-phase" id="solution-phase">
-                        <div class="solution-content">
-                            <div class="solution-logo">Josefin</div>
-                            <div class="solution-items">
-                                <div class="solution-item">📅</div>
-                                <div class="solution-item">💬</div>
-                                <div class="solution-item">✓</div>
-                            </div>
-                            <div class="calm-brain">😌</div>
+                    <!-- Phase 2: Organized Train System -->
+                    <div class="animation-phase" id="train-phase">
+                        <div class="train-container">
+                            <svg width="350" height="350" style="position: absolute;">
+                                <!-- Horizontal line -->
+                                <path d="M 50 175 L 300 175" class="train-line" id="line1"/>
+                                <!-- Vertical line -->
+                                <path d="M 175 50 L 175 300" class="train-line" id="line2"/>
+                                <!-- Diagonal line 1 -->
+                                <path d="M 80 80 L 270 270" class="train-line" id="line3"/>
+                                <!-- Diagonal line 2 -->
+                                <path d="M 270 80 L 80 270" class="train-line" id="line4"/>
+                                <!-- Circle line -->
+                                <circle cx="175" cy="175" r="90" class="train-line" id="line5"/>
+                            </svg>
+                            <!-- Stations -->
+                            <div class="train-station" style="top: 168px; left: 43px;"></div>
+                            <div class="train-station" style="top: 168px; right: 43px;"></div>
+                            <div class="train-station" style="top: 43px; left: 168px;"></div>
+                            <div class="train-station" style="bottom: 43px; left: 168px;"></div>
+                            <div class="train-station" style="top: 73px; left: 73px;"></div>
+                            <div class="train-station" style="top: 73px; right: 73px;"></div>
+                            <div class="train-station" style="bottom: 73px; left: 73px;"></div>
+                            <div class="train-station" style="bottom: 73px; right: 73px;"></div>
+                            <!-- Moving lights -->
+                            <div class="train-light" style="offset-path: path('M 50 175 L 300 175'); animation-delay: 0s;"></div>
+                            <div class="train-light" style="offset-path: path('M 175 50 L 175 300'); animation-delay: 0.5s;"></div>
+                            <div class="train-light" style="offset-path: path('M 80 80 L 270 270'); animation-delay: 1s;"></div>
+                            <div class="train-light" style="offset-path: path('M 270 80 L 80 270'); animation-delay: 1.5s;"></div>
                         </div>
                     </div>
                 </div>
@@ -509,7 +567,7 @@
                         <div class="day-column"></div>
                         <div class="day-column"></div>
                         <div class="day-column">
-                            <div class="week-event event-dress">Dress Up</div>
+                            <div class="week-event event-dress">Dress Up Day</div>
                         </div>
                         <div class="day-column"></div>
                         <div class="day-column"></div>
@@ -547,7 +605,7 @@
         <div class="usp-container">
             <div class="usp-header">
                 <p class="usp-label">Smart Coordination</p>
-                <h2 class="usp-title">Shared visibility, zero effort</h2>
+                <h2 class="usp-title">Shared visibility, minimal effort</h2>
                 <p class="usp-description">Calendar invites for your partner. WhatsApp reminders for your nanny. Everyone knows what's happening - no one plays messenger.</p>
             </div>
             <div class="coordination-visual">
@@ -563,9 +621,7 @@
                     <div class="notification-item">
                         <div class="notification-to">To: Dad</div>
                         <div class="notification-text">
-                            <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
-                            </svg>
+                            <span class="notification-icon">📅</span>
                             <span>Calendar invite sent: Parent-teacher conference Wednesday 5pm</span>
                         </div>
                     </div>
@@ -584,7 +640,7 @@
                             <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
                             </svg>
-                            <span>Reminder - Mum and Dad will be at the Parent-Teacher Conference tonight; please feed the kids with Wednesday's meal plan, and start bath time</span>
+                            <span>Reminder: Mum and Dad will be at the Parent-Teacher Conference tonight; please feed the kids with Wednesday's meal plan, and start bath time</span>
                         </div>
                     </div>
                 </div>
@@ -706,15 +762,15 @@
     </div>
 
     <script>
-        // Animation cycling
+        // Animation cycling between yarn and train
         let currentPhase = 0;
-        const phases = ['chaos-phase', 'solution-phase'];
+        const phases = ['yarn-phase', 'train-phase'];
         
         setInterval(() => {
             document.getElementById(phases[currentPhase]).classList.remove('active');
             currentPhase = (currentPhase + 1) % phases.length;
             document.getElementById(phases[currentPhase]).classList.add('active');
-        }, 4000);
+        }, 5000);
 
         function openJoinModal() {
             document.getElementById('joinModal').classList.add('active');
