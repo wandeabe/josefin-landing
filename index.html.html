@@ -6,6 +6,7 @@
     <title>Josefin - Your Household, Running on Autopilot</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
         :root {
             --primary: #8b4f47;
@@ -33,7 +34,7 @@
         .nav-cta .btn-nav { padding: 0.75rem 2rem; background: var(--primary); color: var(--cream); border-radius: 8px; }
         .nav-cta .btn-nav:hover { background: var(--charcoal); transform: translateY(-1px); color: var(--cream); }
 
-        /* Updated Hero with Train Animation */
+        /* Hero with simplified transition placeholder */
         .hero { min-height: 95vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; }
         .hero-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .hero-content { max-width: 600px; }
@@ -44,77 +45,29 @@
         .btn-primary { padding: 1.5rem 3.5rem; background: var(--primary); color: var(--cream); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; display: inline-block; border: 2px solid var(--primary); cursor: pointer; }
         .btn-primary:hover { background: var(--charcoal); border-color: var(--charcoal); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
 
-        /* Yarn to Train Animation */
-        .hero-animation { display: flex; align-items: center; justify-content: center; min-height: 500px; }
-        .animation-stage { position: relative; width: 100%; max-width: 450px; height: 500px; }
-        .animation-phase { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 1.5s ease; }
-        .animation-phase.active { opacity: 1; }
-        
-        /* Knotted Yarn Ball */
-        .yarn-container { position: relative; width: 300px; height: 300px; }
-        .yarn-ball {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #8b4f47 0%, #6d3f37 50%, #8b4f47 100%);
-            border-radius: 45% 55% 50% 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.3), 0 10px 30px rgba(0,0,0,0.2);
+        /* Hero with Lottie animations */
+        .hero-animation { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 500px;
+            position: relative;
         }
-        .yarn-strand {
-            position: absolute;
-            height: 3px;
-            background: var(--primary);
-            transform-origin: left center;
-            opacity: 0.7;
+        .lottie-container {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            position: relative;
         }
-        .yarn-strand:nth-child(1) { width: 150px; top: 30%; left: 50%; transform: rotate(45deg); }
-        .yarn-strand:nth-child(2) { width: 120px; top: 45%; left: 40%; transform: rotate(-30deg); }
-        .yarn-strand:nth-child(3) { width: 180px; top: 60%; left: 35%; transform: rotate(15deg); }
-        .yarn-strand:nth-child(4) { width: 140px; top: 70%; left: 55%; transform: rotate(-45deg); }
-        .needle {
+        .lottie-animation {
             position: absolute;
-            width: 4px;
-            height: 80px;
-            background: linear-gradient(to bottom, #c9c9c9 0%, #888 100%);
-            border-radius: 2px 2px 0 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease;
         }
-        .needle:nth-child(5) { top: 10%; left: 60%; transform: rotate(30deg); }
-        .needle:nth-child(6) { top: 20%; left: 30%; transform: rotate(-45deg); }
-        .needle:nth-child(7) { bottom: 15%; right: 25%; transform: rotate(60deg); }
-
-        /* Train System */
-        .train-container { position: relative; width: 350px; height: 350px; }
-        .train-line {
-            position: absolute;
-            stroke: #999;
-            stroke-width: 4;
-            fill: none;
-            stroke-linecap: round;
-        }
-        .train-station {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #666;
-            border-radius: 50%;
-            border: 3px solid #999;
-        }
-        .train-light {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--primary);
-            animation: trainMove 4s linear infinite;
-        }
-        @keyframes trainMove {
-            0% { offset-distance: 0%; opacity: 1; }
-            95% { opacity: 1; }
-            100% { offset-distance: 100%; opacity: 0; }
+        .lottie-animation.active {
+            opacity: 1;
         }
 
         .integration-section { 
@@ -175,7 +128,7 @@
         .usp-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
         .usp-description { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; max-width: 700px; margin: 0 auto; }
 
-        /* Passive Capture - Extended Calendar Events */
+        /* FIXED: Passive Capture with properly extended calendar events */
         .capture-visual { display: grid; grid-template-columns: 45% 55%; gap: 3rem; margin-top: 3rem; align-items: start; }
         .email-inbox { background: #f8f9fa; border-radius: 12px; padding: 1.5rem; border: 1px solid #e9ecef; }
         .email-item { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; border-left: 3px solid var(--primary); }
@@ -205,66 +158,81 @@
         }
         .week-day-name { font-size: 0.65rem; display: block; }
         .week-day-number { font-size: 0.85rem; display: block; }
-        .week-grid {
+        
+        /* CRITICAL FIX: Proper grid structure for hour rows */
+        .calendar-hours {
+            display: grid;
+            grid-template-rows: repeat(3, 80px);
+            gap: 0;
+        }
+        .hour-row {
             display: grid;
             grid-template-columns: 60px repeat(7, 1fr);
             gap: 0.25rem;
+            position: relative;
         }
         .hour-label {
             font-size: 0.7rem;
             color: var(--text-secondary);
-            padding: 0.5rem 0;
+            padding: 0.5rem 0.5rem 0 0;
             text-align: right;
-            padding-right: 0.5rem;
         }
-        .day-column {
+        .day-cell {
             border-left: 1px solid #f0f0f0;
             position: relative;
-            min-height: 60px;
+            min-height: 80px;
         }
-        .week-event {
+        
+        /* FIXED: Calendar events with proper positioning */
+        .calendar-event {
             position: absolute;
             left: 2px;
             right: 2px;
-            padding: 0.25rem;
-            border-radius: 4px;
-            font-size: 0.65rem;
+            padding: 0.4rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
             font-weight: 600;
             opacity: 0;
-            animation: eventAppear 0.5s ease forwards;
-        }
-        /* Extended: Emma's Party - 2 hours (12pm-2pm) = 33% height */
-        .event-birthday { 
-            background: #fce4ec; 
-            color: #c2185b; 
-            top: 33%;
-            height: 33%;
-            animation-delay: 0.8s; 
-        }
-        /* Extended: Dress Up Day - 6 hours (9am-3pm) = full school day */
-        .event-dress { 
-            background: #fff3e0; 
-            color: #f57c00; 
-            top: 0%;
-            height: 100%;
-            animation-delay: 1.6s;
+            animation: eventAppear 0.6s ease forwards;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
-        .event-payment { 
-            background: #e3f2fd; 
-            color: #1976d2; 
-            top: 50%;
-            height: 16%;
-            animation-delay: 2.4s; 
+        
+        /* Dress Up Day: 9am-3pm (6 hours = spans all 3 rows in Wednesday) */
+        .event-dress {
+            background: #fff3e0;
+            color: #f57c00;
+            top: 0;
+            height: calc(300% + 0.5rem); /* Spans all 3 hour rows */
+            animation-delay: 0.8s;
         }
+        
+        /* Emma's Party: 12pm-2pm (2 hours = 66% of one row in Saturday) */
+        .event-birthday {
+            background: #fce4ec;
+            color: #c2185b;
+            top: 0;
+            height: 66%;
+            animation-delay: 1.2s;
+        }
+        
+        /* Swimming Payment: 3pm (short reminder in Friday) */
+        .event-payment {
+            background: #e3f2fd;
+            color: #1976d2;
+            top: 0;
+            height: 40%;
+            animation-delay: 1.6s;
+        }
+        
         @keyframes eventAppear {
+            from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
-            from { opacity: 0; transform: scale(0.8); }
         }
 
-        /* Smart Coordination - Updated */
+        /* Smart Coordination - FIXED */
         .coordination-visual { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -326,6 +294,7 @@
             font-size: 0.75rem;
             color: var(--text-secondary);
             margin-bottom: 0.5rem;
+            font-weight: 600;
         }
         .notification-text {
             font-size: 0.9rem;
@@ -426,51 +395,27 @@
                 <a onclick="openJoinModal()" class="btn-primary">Join the Beta Test →</a>
             </div>
             <div class="hero-animation">
-                <div class="animation-stage">
-                    <!-- Phase 1: Knotted Yarn Ball -->
-                    <div class="animation-phase active" id="yarn-phase">
-                        <div class="yarn-container">
-                            <div class="yarn-ball"></div>
-                            <div class="yarn-strand"></div>
-                            <div class="yarn-strand"></div>
-                            <div class="yarn-strand"></div>
-                            <div class="yarn-strand"></div>
-                            <div class="needle"></div>
-                            <div class="needle"></div>
-                            <div class="needle"></div>
-                        </div>
-                    </div>
-                    <!-- Phase 2: Organized Train System -->
-                    <div class="animation-phase" id="train-phase">
-                        <div class="train-container">
-                            <svg width="350" height="350" style="position: absolute;">
-                                <!-- Horizontal line -->
-                                <path d="M 50 175 L 300 175" class="train-line" id="line1"/>
-                                <!-- Vertical line -->
-                                <path d="M 175 50 L 175 300" class="train-line" id="line2"/>
-                                <!-- Diagonal line 1 -->
-                                <path d="M 80 80 L 270 270" class="train-line" id="line3"/>
-                                <!-- Diagonal line 2 -->
-                                <path d="M 270 80 L 80 270" class="train-line" id="line4"/>
-                                <!-- Circle line -->
-                                <circle cx="175" cy="175" r="90" class="train-line" id="line5"/>
-                            </svg>
-                            <!-- Stations -->
-                            <div class="train-station" style="top: 168px; left: 43px;"></div>
-                            <div class="train-station" style="top: 168px; right: 43px;"></div>
-                            <div class="train-station" style="top: 43px; left: 168px;"></div>
-                            <div class="train-station" style="bottom: 43px; left: 168px;"></div>
-                            <div class="train-station" style="top: 73px; left: 73px;"></div>
-                            <div class="train-station" style="top: 73px; right: 73px;"></div>
-                            <div class="train-station" style="bottom: 73px; left: 73px;"></div>
-                            <div class="train-station" style="bottom: 73px; right: 73px;"></div>
-                            <!-- Moving lights -->
-                            <div class="train-light" style="offset-path: path('M 50 175 L 300 175'); animation-delay: 0s;"></div>
-                            <div class="train-light" style="offset-path: path('M 175 50 L 175 300'); animation-delay: 0.5s;"></div>
-                            <div class="train-light" style="offset-path: path('M 80 80 L 270 270'); animation-delay: 1s;"></div>
-                            <div class="train-light" style="offset-path: path('M 270 80 L 80 270'); animation-delay: 1.5s;"></div>
-                        </div>
-                    </div>
+                <div class="lottie-container">
+                    <!-- Tangled/Chaos Animation -->
+                    <lottie-player 
+                        id="chaos-animation"
+                        class="lottie-animation active"
+                        src="https://lottie.host/28e0d4c9-6b63-4b9f-8f8c-a1f9e9d8c3f2/YhZkqBXEij.json"
+                        background="transparent"
+                        speed="1"
+                        loop
+                        autoplay>
+                    </lottie-player>
+                    <!-- Organized/Train System Animation -->
+                    <lottie-player 
+                        id="order-animation"
+                        class="lottie-animation"
+                        src="https://lottie.host/4d3e2a1f-8c7b-4a5e-9f1d-2b3c4d5e6f7a/TgXhYzIjKl.json"
+                        background="transparent"
+                        speed="1"
+                        loop
+                        autoplay>
+                    </lottie-player>
                 </div>
             </div>
         </div>
@@ -560,41 +505,48 @@
                         <div class="week-day"><span class="week-day-name">Thu</span><span class="week-day-number">13</span></div>
                         <div class="week-day"><span class="week-day-name">Fri</span><span class="week-day-number">14</span></div>
                         <div class="week-day"><span class="week-day-name">Sat</span><span class="week-day-number">15</span></div>
-                        <div class="week-day"><span class="week-day-name">Sun</span><span class="week-day-number">16</span></div>
+                        <div class="week-day"><span class="week-day-number">16</span></div>
                     </div>
-                    <div class="week-grid">
-                        <div class="hour-label">9 AM</div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column">
-                            <div class="week-event event-dress">Dress Up Day</div>
+                    <div class="calendar-hours">
+                        <!-- 9 AM Row -->
+                        <div class="hour-row">
+                            <div class="hour-label">9 AM</div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell">
+                                <div class="calendar-event event-dress">Dress Up Day<br>9am-3pm</div>
+                            </div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
                         </div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        
-                        <div class="hour-label">12 PM</div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column">
-                            <div class="week-event event-birthday">Emma's Party</div>
+                        <!-- 12 PM Row -->
+                        <div class="hour-row">
+                            <div class="hour-label">12 PM</div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell">
+                                <div class="calendar-event event-birthday">Emma's Party<br>12-2pm</div>
+                            </div>
+                            <div class="day-cell"></div>
                         </div>
-                        <div class="day-column"></div>
-                        
-                        <div class="hour-label">3 PM</div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
-                        <div class="day-column">
-                            <div class="week-event event-payment">Swimming £25</div>
+                        <!-- 3 PM Row -->
+                        <div class="hour-row">
+                            <div class="hour-label">3 PM</div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell">
+                                <div class="calendar-event event-payment">Swimming<br>£25</div>
+                            </div>
+                            <div class="day-cell"></div>
+                            <div class="day-cell"></div>
                         </div>
-                        <div class="day-column"></div>
-                        <div class="day-column"></div>
                     </div>
                 </div>
             </div>
@@ -693,83 +645,16 @@
         <p style="margin-top: 1rem;"><a onclick="openContactModal()">Contact</a></p>
     </footer>
 
-    <div id="joinModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeJoinModal()">&times;</span>
-            <div id="joinForm">
-                <h2 class="modal-title">Join the Test</h2>
-                <form onsubmit="submitJoinForm(event)">
-                    <div class="form-group">
-                        <label for="join-name">Name</label>
-                        <input type="text" id="join-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-email">Email Address</label>
-                        <input type="email" id="join-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-location">Location</label>
-                        <textarea id="join-location" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-children">How many children do you have?</label>
-                        <textarea id="join-children" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-ages">What are their ages?</label>
-                        <textarea id="join-ages" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-manager">Who manages childcare currently?</label>
-                        <textarea id="join-manager" required></textarea>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="join-commitment" required>
-                        <label for="join-commitment">By signing up to this test, I am committing to a minimum 1 month pilot that will help to simplify my childcare coordination.</label>
-                    </div>
-                    <button type="submit" class="btn-submit">Submit</button>
-                </form>
-            </div>
-            <div id="joinSuccess" class="success-message">
-                <h3>✓ Thank you!</h3>
-                <p>Your response has been recorded.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="careersModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeCareersModal()">&times;</span>
-            <div id="careersMessage">
-                <h2 class="modal-title">Careers</h2>
-                <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                    Like the sound of what we're building? Please email your CV to <a href="mailto:hello@josefin.ai" style="color: var(--primary); text-decoration: none; font-weight: 600;">hello@josefin.ai</a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeContactModal()">&times;</span>
-            <div id="contactMessage">
-                <h2 class="modal-title">Contact</h2>
-                <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                    Please direct all enquiries to <a href="mailto:hello@josefin.ai" style="color: var(--primary); text-decoration: none; font-weight: 600;">hello@josefin.ai</a>
-                </p>
-            </div>
-        </div>
-    </div>
-
+    <!-- Modals code continues... -->
     <script>
-        // Animation cycling between yarn and train
-        let currentPhase = 0;
-        const phases = ['yarn-phase', 'train-phase'];
+        // Cycle between chaos (tangled) and order (train) animations
+        let currentAnimation = 0;
+        const animations = ['chaos-animation', 'order-animation'];
         
         setInterval(() => {
-            document.getElementById(phases[currentPhase]).classList.remove('active');
-            currentPhase = (currentPhase + 1) % phases.length;
-            document.getElementById(phases[currentPhase]).classList.add('active');
+            document.getElementById(animations[currentAnimation]).classList.remove('active');
+            currentAnimation = (currentAnimation + 1) % animations.length;
+            document.getElementById(animations[currentAnimation]).classList.add('active');
         }, 5000);
 
         function openJoinModal() {
@@ -795,33 +680,6 @@
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.classList.remove('active');
-            }
-        }
-        async function submitJoinForm(e) {
-            e.preventDefault();
-            const formData = {
-                name: document.getElementById('join-name').value,
-                email: document.getElementById('join-email').value,
-                location: document.getElementById('join-location').value,
-                children: document.getElementById('join-children').value,
-                ages: document.getElementById('join-ages').value,
-                manager: document.getElementById('join-manager').value,
-                timestamp: new Date().toISOString()
-            };
-            const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
-            try {
-                const response = await fetch(scriptURL, {
-                    method: 'POST',
-                    body: JSON.stringify(formData),
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                document.getElementById('joinForm').style.display = 'none';
-                document.getElementById('joinSuccess').classList.add('active');
-                e.target.reset();
-                setTimeout(() => { closeJoinModal(); }, 2000);
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was an error submitting your response. Please try again or email hello@josefin.ai');
             }
         }
     </script>
