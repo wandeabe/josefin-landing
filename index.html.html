@@ -6,7 +6,6 @@
     <title>Josefin - Your Household, Running on Autopilot</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
         :root {
             --primary: #8b4f47;
@@ -45,7 +44,7 @@
         .btn-primary { padding: 1.5rem 3.5rem; background: var(--primary); color: var(--cream); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; display: inline-block; border: 2px solid var(--primary); cursor: pointer; }
         .btn-primary:hover { background: var(--charcoal); border-color: var(--charcoal); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
 
-        /* Hero with Lottie animations */
+        /* Hero with Product Showcase Animation */
         .hero-animation { 
             display: flex; 
             align-items: center; 
@@ -53,21 +52,185 @@
             min-height: 500px;
             position: relative;
         }
-        .lottie-container {
+        .product-showcase {
             width: 100%;
-            max-width: 400px;
-            height: 400px;
+            max-width: 450px;
+            height: 500px;
             position: relative;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
         }
-        .lottie-animation {
+        .showcase-layer {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1.5s ease;
+            transform: scale(0.95);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
-        .lottie-animation.active {
+        .showcase-layer.active {
             opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Gmail Inbox Demo */
+        .email-inbox-demo {
+            width: 100%;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem;
+            max-height: 450px;
+            overflow: hidden;
+        }
+        .email-header {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+        .email-item-demo {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid var(--primary);
+        }
+        .email-item-demo .email-subject {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+        .email-item-demo .email-preview {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Calendar Demo */
+        .calendar-demo {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-subtle);
+        }
+        .calendar-header {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+        .week-header-demo {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--warm-grey);
+        }
+        .week-day-demo {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .calendar-events-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .cal-event-demo {
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .event-dress-demo {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        .event-birthday-demo {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+        .event-payment-demo {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        /* Coordination Demo */
+        .coordination-demo {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-subtle);
+        }
+        .coord-header {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+        .coord-message {
+            padding: 1rem;
+            border-radius: 8px;
+            background: var(--warm-grey);
+            border-left: 3px solid var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        .coord-to {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .coord-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        /* Summary Demo */
+        .summary-demo {
+            width: 100%;
+            background: #e5ddd5;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .summary-header-demo {
+            background: #075e54;
+            padding: 1rem 1.5rem;
+            color: white;
+        }
+        .summary-header-demo div:first-child {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .summary-status-demo {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+        .summary-messages-demo {
+            padding: 1.5rem;
+        }
+        .summary-item-demo {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .summary-conflict-demo {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
         }
 
         .integration-section { 
@@ -379,7 +542,7 @@
         <div class="nav-container">
             <a href="#" class="logo">Josefin</a>
             <div class="nav-cta">
-                <a onclick="openCareersModal()">Careers</a>
+                <a onclick="openCareersModal()">Join Josefin</a>
                 <a onclick="openJoinModal()" class="btn-nav">Join the Test</a>
             </div>
         </div>
@@ -395,27 +558,90 @@
                 <a onclick="openJoinModal()" class="btn-primary">Join the Beta Test →</a>
             </div>
             <div class="hero-animation">
-                <div class="lottie-container">
-                    <!-- Tangled/Chaos Animation -->
-                    <lottie-player 
-                        id="chaos-animation"
-                        class="lottie-animation active"
-                        src="https://lottie.host/28e0d4c9-6b63-4b9f-8f8c-a1f9e9d8c3f2/YhZkqBXEij.json"
-                        background="transparent"
-                        speed="1"
-                        loop
-                        autoplay>
-                    </lottie-player>
-                    <!-- Organized/Train System Animation -->
-                    <lottie-player 
-                        id="order-animation"
-                        class="lottie-animation"
-                        src="https://lottie.host/4d3e2a1f-8c7b-4a5e-9f1d-2b3c4d5e6f7a/TgXhYzIjKl.json"
-                        background="transparent"
-                        speed="1"
-                        loop
-                        autoplay>
-                    </lottie-player>
+                <div class="product-showcase">
+                    <!-- Layer 1: Gmail Inbox (chaos) -->
+                    <div class="showcase-layer" id="layer-inbox">
+                        <div class="email-inbox-demo">
+                            <div class="email-header">Inbox</div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">🎉 You're Invited! Emma's Birthday Party</div>
+                                <div class="email-preview">Join us for Emma's 7th birthday celebration...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">🦸 Dress Up Day Next Week</div>
+                                <div class="email-preview">Theme: Superheroes! Children can come dressed...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">💰 Swimming Lesson Payment Due</div>
+                                <div class="email-preview">£25 payment required by Friday...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">📋 Parent-Teacher Conference</div>
+                                <div class="email-preview">Schedule your appointment for next week...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">🏃 Sports Day Volunteer Request</div>
+                                <div class="email-preview">We need parent volunteers for sports day...</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Layer 2: Calendar with Josefin events -->
+                    <div class="showcase-layer" id="layer-calendar">
+                        <div class="calendar-demo">
+                            <div class="calendar-header">This Week</div>
+                            <div class="week-header-demo">
+                                <div class="week-day-demo">Mon 10</div>
+                                <div class="week-day-demo">Tue 11</div>
+                                <div class="week-day-demo">Wed 12</div>
+                                <div class="week-day-demo">Thu 13</div>
+                                <div class="week-day-demo">Fri 14</div>
+                                <div class="week-day-demo">Sat 15</div>
+                            </div>
+                            <div class="calendar-events-demo">
+                                <div class="cal-event-demo event-dress-demo">
+                                    <strong>Josefin:</strong> Dress Up Day
+                                </div>
+                                <div class="cal-event-demo event-birthday-demo">
+                                    <strong>Josefin:</strong> Emma's Party
+                                </div>
+                                <div class="cal-event-demo event-payment-demo">
+                                    <strong>Josefin:</strong> Swimming £25
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Layer 3: Coordination Messages -->
+                    <div class="showcase-layer" id="layer-coordination">
+                        <div class="coordination-demo">
+                            <div class="coord-header">Coordinating...</div>
+                            <div class="coord-message">
+                                <div class="coord-to">To: Dad</div>
+                                <div class="coord-text">📅 Parent-teacher conference Wednesday 5pm - Can you attend?</div>
+                            </div>
+                            <div class="coord-message">
+                                <div class="coord-to">To: Sofia (Nanny)</div>
+                                <div class="coord-text">💬 Mum & Dad at conference tonight - feed kids with Wednesday's meal plan</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Layer 4: Daily Summary -->
+                    <div class="showcase-layer" id="layer-summary">
+                        <div class="summary-demo">
+                            <div class="summary-header-demo">
+                                <div>Josefin</div>
+                                <div class="summary-status-demo">Your Daily Summary</div>
+                            </div>
+                            <div class="summary-messages-demo">
+                                <div class="summary-item-demo">📅 <strong>Today:</strong> Pickup at 3pm (Dad confirmed)</div>
+                                <div class="summary-item-demo">📋 <strong>Tomorrow:</strong> Permission slip due</div>
+                                <div class="summary-item-demo">💰 <strong>Friday:</strong> £25 swimming payment</div>
+                                <div class="summary-item-demo summary-conflict-demo">⚠️ <strong>Conflict:</strong> Conference overlaps with your 5pm meeting</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -514,7 +740,7 @@
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
                             <div class="day-cell">
-                                <div class="calendar-event event-dress">Dress Up Day<br>9am-3pm</div>
+                                <div class="calendar-event event-dress">Josefin: Dress Up Day<br>9am-3pm</div>
                             </div>
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
@@ -530,7 +756,7 @@
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
                             <div class="day-cell">
-                                <div class="calendar-event event-birthday">Emma's Party<br>12-2pm</div>
+                                <div class="calendar-event event-birthday">Josefin: Emma's Party<br>12-2pm</div>
                             </div>
                             <div class="day-cell"></div>
                         </div>
@@ -542,7 +768,7 @@
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
                             <div class="day-cell">
-                                <div class="calendar-event event-payment">Swimming<br>£25</div>
+                                <div class="calendar-event event-payment">Josefin: Swimming<br>£25</div>
                             </div>
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
@@ -645,17 +871,91 @@
         <p style="margin-top: 1rem;"><a onclick="openContactModal()">Contact</a></p>
     </footer>
 
-    <!-- Modals code continues... -->
-    <script>
-        // Cycle between chaos (tangled) and order (train) animations
-        let currentAnimation = 0;
-        const animations = ['chaos-animation', 'order-animation'];
+    <!-- Join Modal -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeJoinModal()">&times;</span>
+            <div id="joinForm">
+                <h2 class="modal-title">Join the Test</h2>
+                <form onsubmit="submitJoinForm(event)">
+                    <div class="form-group">
+                        <label for="join-name">Name</label>
+                        <input type="text" id="join-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-email">Email Address</label>
+                        <input type="email" id="join-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-location">Location</label>
+                        <textarea id="join-location" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-children">How many children do you have?</label>
+                        <textarea id="join-children" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-ages">What are their ages?</label>
+                        <textarea id="join-ages" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="join-manager">Who manages childcare currently?</label>
+                        <textarea id="join-manager" required></textarea>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="join-commitment" required>
+                        <label for="join-commitment">By signing up to this test, I am committing to a minimum 1 month pilot that will help to simplify my childcare coordination.</label>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
+            </div>
+            <div id="joinSuccess" class="success-message">
+                <h3>✓ Thank you!</h3>
+                <p>Your response has been recorded.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Careers Modal -->
+    <div id="careersModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCareersModal()">&times;</span>
+            <div id="careersMessage">
+                <h2 class="modal-title">Join Josefin</h2>
+                <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                    Like the sound of what we're building? Please email your CV to <a href="/cdn-cgi/l/email-protection#452d2029292a052f2a3620232c2b6b242c" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="4129242d2d2e012b2e322427282f6f2028">[email&#160;protected]</span></a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeContactModal()">&times;</span>
+            <div id="contactMessage">
+                <h2 class="modal-title">Contact</h2>
+                <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                    Please direct all enquiries to <a href="/cdn-cgi/l/email-protection#84ece1e8e8ebc4eeebf7e1e2edeaaae5ed" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="b9d1dcd5d5d6f9d3d6cadcdfd0d797d8d0">[email&#160;protected]</span></a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Product Showcase Animation - cycle through 4 layers
+        const layers = ['layer-inbox', 'layer-calendar', 'layer-coordination', 'layer-summary'];
+        let currentLayer = 0;
         
+        // Show first layer immediately
+        document.getElementById(layers[0]).classList.add('active');
+        
+        // Cycle through layers every 3 seconds
         setInterval(() => {
-            document.getElementById(animations[currentAnimation]).classList.remove('active');
-            currentAnimation = (currentAnimation + 1) % animations.length;
-            document.getElementById(animations[currentAnimation]).classList.add('active');
-        }, 5000);
+            document.getElementById(layers[currentLayer]).classList.remove('active');
+            currentLayer = (currentLayer + 1) % layers.length;
+            document.getElementById(layers[currentLayer]).classList.add('active');
+        }, 3000);
 
         function openJoinModal() {
             document.getElementById('joinModal').classList.add('active');
@@ -682,6 +982,28 @@
                 event.target.classList.remove('active');
             }
         }
-    </script>
-</body>
-</html>
+        
+        async function submitJoinForm(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('join-name').value,
+                email: document.getElementById('join-email').value,
+                location: document.getElementById('join-location').value,
+                children: document.getElementById('join-children').value,
+                ages: document.getElementById('join-ages').value,
+                manager: document.getElementById('join-manager').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Replace with your actual Google Apps Script URL
+            const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+            
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                document.getElementById('joinForm').style.display = 'none';
+                document.getElementById('joinSuccess').classList.add('acti
