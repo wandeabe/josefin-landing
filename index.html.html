@@ -383,13 +383,6 @@
         }
         .showcase-layer.active { opacity: 1 !important; transform: scale(1) !important; z-index: 2; }
         .email-inbox-demo { width: 100%; background: #f8f9fa; border-radius: 12px; padding: 1rem; max-height: 450px; overflow: hidden; }
-        
-        .inbox-label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-            color: #6a6a6a;
-        }
         .email-header { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
         .email-item-demo { background: white; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; border-left: 3px solid #8b4f47; }
         .email-item-demo .email-subject { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; }
@@ -485,10 +478,8 @@
             <div class="hero-animation">
                 <div class="product-showcase">
                     <div class="showcase-layer active" id="layer-inbox">
-                        <div style="width: 100%;">
+                        <div class="email-inbox-demo">
                             <div class="email-header">Extracting...</div>
-                            <div class="email-inbox-demo">
-                                <div class="inbox-label">Inbox</div>
                             <div class="email-item-demo">
                                 <div class="email-subject">🎉 You're Invited! Emma's Birthday Party</div>
                                 <div class="email-preview">Join us for Emma's 7th birthday celebration...</div>
@@ -512,61 +503,16 @@
                         </div>
                     </div>
                     <div class="showcase-layer" id="layer-calendar">
-                        <div style="width: 100%; max-width: 420px;">
+                        <div class="calendar-demo">
                             <div class="calendar-header">Scheduling...</div>
-                            <div class="calendar-container" style="background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid #e0ddd8;">
-                                <div class="calendar-week-header" style="display: grid; grid-template-columns: 60px repeat(7, 1fr); gap: 0.25rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e8e6e1;">
-                                    <div style="font-size: 0.7rem; font-weight: 600; color: #6a6a6a;"></div>
-                                    <div style="text-align: center; font-size: 0.7rem; font-weight: 600; color: #6a6a6a;">Mon<br>10</div>
-                                    <div style="text-align: center; font-size: 0.7rem; font-weight: 600; color: #6a6a6a;">Tue<br>11</div>
-                                    <div style="text-align: center; font-size: 0.7rem; font-weight: 600; color: #6a6a6a;">Wed<br>12</div>
-                                    <div style="text-align: center; font-size: 0.7rem; font-weight: 600; color: #6a6a6a;">Thu<br>13</div>
-                                    <div style="text-align: center; font-size: 0.7rem; font-weight: 600; color: #6a6a6a;">Fri<br>14</div>
-                                    <div style="text-align: center; font-size: 0.7rem; font-weight: 600; color: #6a6a6a;">Sat<br>15</div>
-                                    <div style="text-align: center; font-size: 0.7rem; font-weight: 600; color: #6a6a6a;">Sun<br>16</div>
-                                </div>
-                                <!-- 9 AM Row -->
-                                <div class="hour-row" style="display: grid; grid-template-columns: 60px repeat(7, 1fr); gap: 0.25rem; margin-bottom: 0.5rem;">
-                                    <div style="font-size: 0.7rem; color: #6a6a6a; padding: 0.5rem 0;">9 AM</div>
-                                    <div style="border: 1px solid #e8e6e1; min-height: 60px;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1; position: relative;">
-                                        <div style="background: #fff3e0; color: #f57c00; padding: 0.5rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; line-height: 1.3;">Josefin:<br>Dress Up Day<br><span style="font-size: 0.65rem; opacity: 0.8;">9am-3pm</span></div>
-                                    </div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                </div>
-                                <!-- 12 PM Row -->
-                                <div class="hour-row" style="display: grid; grid-template-columns: 60px repeat(7, 1fr); gap: 0.25rem; margin-bottom: 0.5rem;">
-                                    <div style="font-size: 0.7rem; color: #6a6a6a; padding: 0.5rem 0;">12 PM</div>
-                                    <div style="border: 1px solid #e8e6e1; min-height: 60px;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1; position: relative;">
-                                        <div style="background: #fce4ec; color: #c2185b; padding: 0.5rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; line-height: 1.3;">Josefin:<br>Emma's Party<br><span style="font-size: 0.65rem; opacity: 0.8;">12-2pm</span></div>
-                                    </div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                </div>
-                                <!-- 3 PM Row -->
-                                <div class="hour-row" style="display: grid; grid-template-columns: 60px repeat(7, 1fr); gap: 0.25rem;">
-                                    <div style="font-size: 0.7rem; color: #6a6a6a; padding: 0.5rem 0;">3 PM</div>
-                                    <div style="border: 1px solid #e8e6e1; min-height: 60px;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1; position: relative;">
-                                        <div style="background: #e3f2fd; color: #1976d2; padding: 0.5rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; line-height: 1.3;">Josefin:<br>Swimming<br><span style="font-size: 0.65rem; opacity: 0.8;">£25</span></div>
-                                    </div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                    <div style="border: 1px solid #e8e6e1;"></div>
-                                </div>
+                            <div class="week-header-demo">
+                                <div class="week-day-demo">Mon 10</div>
+                                <div class="week-day-demo">Tue 11</div>
+                                <div class="week-day-demo">Wed 12</div>
+                                <div class="week-day-demo">Thu 13</div>
+                                <div class="week-day-demo">Fri 14</div>
+                                <div class="week-day-demo">Sat 15</div>
                             </div>
-                        </div>
-                    </div>
                             <div class="calendar-events-demo">
                                 <div class="cal-event-demo event-dress-demo"><strong>Josefin:</strong> Dress Up Day</div>
                                 <div class="cal-event-demo event-birthday-demo"><strong>Josefin:</strong> Emma's Party</div>
