@@ -78,8 +78,8 @@
             z-index: 1;
         }
         .showcase-layer.active {
-            opacity: 1;
-            transform: scale(1);
+            opacity: 1 !important;
+            transform: scale(1) !important;
             z-index: 2;
         }
         
@@ -507,7 +507,7 @@
         footer a:hover { color: var(--cream); }
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
-        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal.active { display: flex !important; align-items: center; justify-content: center; }
         .modal-content { background: white; border-radius: 16px; padding: 3rem; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2rem; font-weight: 300; color: var(--text-secondary); cursor: pointer; transition: color 0.3s; }
         .modal-close:hover { color: var(--charcoal); }
@@ -945,7 +945,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Product Showcase Animation - cycle through 4 layers
         document.addEventListener('DOMContentLoaded', function() {
             const layers = ['layer-inbox', 'layer-calendar', 'layer-coordination', 'layer-summary'];
