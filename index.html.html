@@ -399,6 +399,14 @@
         .coord-message { padding: 1rem; border-radius: 8px; background: #e8e6e1; border-left: 3px solid #8b4f47; margin-bottom: 0.75rem; }
         .coord-to { font-size: 0.7rem; color: #6a6a6a; margin-bottom: 0.5rem; font-weight: 600; }
         .coord-text { font-size: 0.85rem; font-weight: 500; line-height: 1.4; }
+        
+        .summary-demo-wrapper { width: 100%; }
+        .summary-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
         .summary-demo { width: 100%; background: #e5ddd5; border-radius: 16px; overflow: hidden; }
         .summary-header-demo { background: #075e54; padding: 1rem 1.5rem; color: white; }
         .summary-header-demo div:first-child { font-weight: 600; font-size: 1rem; }
@@ -526,11 +534,13 @@
                         </div>
                     </div>
                     <div class="showcase-layer" id="layer-summary">
-                        <div class="summary-demo">
-                            <div class="summary-header-demo">
-                                <div>Josefin</div>
-                                <div class="summary-status-demo">Planning ahead...</div>
-                            </div>
+                        <div class="summary-demo-wrapper">
+                            <div class="summary-title">Planning ahead...</div>
+                            <div class="summary-demo">
+                                <div class="summary-header-demo">
+                                    <div>Josefin</div>
+                                    <div class="summary-status-demo">Your Daily Summary</div>
+                                </div>
                             <div class="summary-messages-demo">
                                 <div class="summary-item-demo">📅 <strong>Today:</strong> Pickup at 3pm (Dad confirmed)</div>
                                 <div class="summary-item-demo">📋 <strong>Tomorrow:</strong> Permission slip due</div>
