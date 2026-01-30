@@ -60,6 +60,7 @@
             border-radius: 16px;
             background: white;
             box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            overflow: hidden;
         }
         .showcase-layer {
             position: absolute;
@@ -74,10 +75,12 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            z-index: 1;
         }
         .showcase-layer.active {
             opacity: 1;
             transform: scale(1);
+            z-index: 2;
         }
         
         /* Gmail Inbox Demo */
@@ -560,7 +563,7 @@
             <div class="hero-animation">
                 <div class="product-showcase">
                     <!-- Layer 1: Gmail Inbox (chaos) -->
-                    <div class="showcase-layer" id="layer-inbox">
+                    <div class="showcase-layer active" id="layer-inbox">
                         <div class="email-inbox-demo">
                             <div class="email-header">Inbox</div>
                             <div class="email-item-demo">
@@ -923,7 +926,7 @@
             <div id="careersMessage">
                 <h2 class="modal-title">Join Josefin</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                    Like the sound of what we're building? Please email your CV to <a href="/cdn-cgi/l/email-protection#452d2029292a052f2a3620232c2b6b242c" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="4129242d2d2e012b2e322427282f6f2028">[email&#160;protected]</span></a>
+                    Like the sound of what we're building? Please email your CV to <a href="/cdn-cgi/l/email-protection#c9a1aca5a5a689a3a6baacafa0a7e7a8a0" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="abc3cec7c7c4ebc1c4d8cecdc2c585cac2">[email&#160;protected]</span></a>
                 </p>
             </div>
         </div>
@@ -936,7 +939,7 @@
             <div id="contactMessage">
                 <h2 class="modal-title">Contact</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                    Please direct all enquiries to <a href="/cdn-cgi/l/email-protection#84ece1e8e8ebc4eeebf7e1e2edeaaae5ed" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="b9d1dcd5d5d6f9d3d6cadcdfd0d797d8d0">[email&#160;protected]</span></a>
+                    Please direct all enquiries to <a href="/cdn-cgi/l/email-protection#bad2dfd6d6d5fad0d5c9dfdcd3d494dbd3" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="94fcf1f8f8fbd4fefbe7f1f2fdfabaf5fd">[email&#160;protected]</span></a>
                 </p>
             </div>
         </div>
@@ -944,18 +947,25 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Product Showcase Animation - cycle through 4 layers
-        const layers = ['layer-inbox', 'layer-calendar', 'layer-coordination', 'layer-summary'];
-        let currentLayer = 0;
-        
-        // Show first layer immediately
-        document.getElementById(layers[0]).classList.add('active');
-        
-        // Cycle through layers every 3 seconds
-        setInterval(() => {
-            document.getElementById(layers[currentLayer]).classList.remove('active');
-            currentLayer = (currentLayer + 1) % layers.length;
-            document.getElementById(layers[currentLayer]).classList.add('active');
-        }, 3000);
+        document.addEventListener('DOMContentLoaded', function() {
+            const layers = ['layer-inbox', 'layer-calendar', 'layer-coordination', 'layer-summary'];
+            let currentLayer = 0;
+            
+            // First layer is already active via HTML class
+            
+            // Cycle through layers every 3 seconds
+            setInterval(() => {
+                const currentEl = document.getElementById(layers[currentLayer]);
+                if (currentEl) {
+                    currentEl.classList.remove('active');
+                }
+                currentLayer = (currentLayer + 1) % layers.length;
+                const nextEl = document.getElementById(layers[currentLayer]);
+                if (nextEl) {
+                    nextEl.classList.add('active');
+                }
+            }, 3000);
+        });
 
         function openJoinModal() {
             document.getElementById('joinModal').classList.add('active');
