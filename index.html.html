@@ -433,6 +433,18 @@
             alert('Form submitted! (Connect to Google Sheets)');
             closeJoinModal();
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var layers = ['layer-inbox', 'layer-calendar', 'layer-coordination', 'layer-summary'];
+            var currentLayer = 0;
+            setInterval(function() {
+                var curr = document.getElementById(layers[currentLayer]);
+                if(curr) curr.classList.remove('active');
+                currentLayer = (currentLayer + 1) % layers.length;
+                var next = document.getElementById(layers[currentLayer]);
+                if(next) next.classList.add('active');
+            }, 3000);
+        });
     </script>
 </head>
 <body>
@@ -808,7 +820,7 @@
             <div id="careersMessage">
                 <h2 class="modal-title">Join Josefin</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                    Like the sound of what we're building? Please email your CV to <a href="/cdn-cgi/l/email-protection#cda5a8a1a1a28da7a2bea8aba4a3e3aca4" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="c0a8a5acacaf80aaafb3a5a6a9aeeea1a9">[email&#160;protected]</span></a>
+                    Like the sound of what we're building? Please email your CV to <a href="/cdn-cgi/l/email-protection#cda5a8a1a1a28da7a2bea8aba4a3e3aca4" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="c0a8a5acacaf80aaafb3a5a6a9aeeea1a9">hello@josefin.ai</span></a>
                 </p>
             </div>
         </div>
@@ -821,76 +833,11 @@
             <div id="contactMessage">
                 <h2 class="modal-title">Contact</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                    Please direct all enquiries to <a href="/cdn-cgi/l/email-protection#345c5158585b745e5b4751525d5a1a555d" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="4b232e2727240b2124382e2d2225652a22">[email&#160;protected]</span></a>
+                    Please direct all enquiries to <a href="/cdn-cgi/l/email-protection#345c5158585b745e5b4751525d5a1a555d" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="4b232e2727240b2124382e2d2225652a22">hello@josefin.ai</span></a>
                 </p>
             </div>
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Cycle between chaos (tangled) and order (train) animations
-        let currentAnimation = 0;
-        const animations = ['chaos-animation', 'order-animation'];
-        
-        setInterval(() => {
-            document.getElementById(animations[currentAnimation]).classList.remove('active');
-            currentAnimation = (currentAnimation + 1) % animations.length;
-            document.getElementById(animations[currentAnimation]).classList.add('active');
-        }, 5000);
-
-        function openJoinModal() {
-            document.getElementById('joinModal').classList.add('active');
-            document.getElementById('joinForm').style.display = 'block';
-            document.getElementById('joinSuccess').classList.remove('active');
-        }
-        function closeJoinModal() {
-            document.getElementById('joinModal').classList.remove('active');
-        }
-        function openCareersModal() {
-            document.getElementById('careersModal').classList.add('active');
-        }
-        function closeCareersModal() {
-            document.getElementById('careersModal').classList.remove('active');
-        }
-        function openContactModal() {
-            document.getElementById('contactModal').classList.add('active');
-        }
-        function closeContactModal() {
-            document.getElementById('contactModal').classList.remove('active');
-        }
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
-            }
-        }
-        
-        async function submitJoinForm(e) {
-            e.preventDefault();
-            const formData = {
-                netElementById('join-manager').value,
-                timestamp: new Date().toISOString()
-            };
-            
-            // Replace with your actual Google Apps Script URL
-            const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
-            
-            try {
-                const response = await fetch(scriptURL, {
-                    method: 'POST',
-                    body: JSON.stringify(formData),
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                
-                document.getElementById('joinForm').style.display = 'none';
-                document.getElementById('joinSuccess').classList.add('active');
-                e.target.reset();
-                
-                setTimeout(() => { closeJoinModal(); }, 2000);
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was an error submitting your response. Please try again or email hello@josefin.ai');
-            }
-        }
-    </script>
-</body>
+    </body>
 </html>
