@@ -6,7 +6,6 @@
     <title>Josefin - Your Household, Running on Autopilot</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
         :root {
             --primary: #8b4f47;
@@ -372,6 +371,41 @@
             .modal-content { padding: 2rem; }
             .integration-text-box { padding: 2rem; }
         }
+
+        .product-showcase {
+            width: 100%; max-width: 450px; height: 500px; position: relative;
+            border-radius: 16px; background: white; box-shadow: 0 8px 32px rgba(0,0,0,0.12); overflow: hidden;
+        }
+        .showcase-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transform: scale(0.95); transition: opacity 0.8s ease, transform 0.8s ease;
+            display: flex; align-items: center; justify-content: center; padding: 2rem; z-index: 1;
+        }
+        .showcase-layer.active { opacity: 1 !important; transform: scale(1) !important; z-index: 2; }
+        .email-inbox-demo { width: 100%; background: #f8f9fa; border-radius: 12px; padding: 1rem; max-height: 450px; overflow: hidden; }
+        .email-header { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
+        .email-item-demo { background: white; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; border-left: 3px solid #8b4f47; }
+        .email-item-demo .email-subject { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; }
+        .email-item-demo .email-preview { font-size: 0.75rem; color: #6a6a6a; }
+        .calendar-demo, .coordination-demo { width: 100%; background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid #e0ddd8; }
+        .calendar-header, .coord-header { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
+        .week-header-demo { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e8e6e1; }
+        .week-day-demo { text-align: center; font-size: 0.75rem; font-weight: 600; color: #6a6a6a; }
+        .calendar-events-demo { display: flex; flex-direction: column; gap: 0.75rem; }
+        .cal-event-demo { padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; }
+        .event-dress-demo { background: #fff3e0; color: #f57c00; }
+        .event-birthday-demo { background: #fce4ec; color: #c2185b; }
+        .event-payment-demo { background: #e3f2fd; color: #1976d2; }
+        .coord-message { padding: 1rem; border-radius: 8px; background: #e8e6e1; border-left: 3px solid #8b4f47; margin-bottom: 0.75rem; }
+        .coord-to { font-size: 0.7rem; color: #6a6a6a; margin-bottom: 0.5rem; font-weight: 600; }
+        .coord-text { font-size: 0.85rem; font-weight: 500; line-height: 1.4; }
+        .summary-demo { width: 100%; background: #e5ddd5; border-radius: 16px; overflow: hidden; }
+        .summary-header-demo { background: #075e54; padding: 1rem 1.5rem; color: white; }
+        .summary-header-demo div:first-child { font-weight: 600; font-size: 1rem; }
+        .summary-status-demo { font-size: 0.75rem; opacity: 0.8; }
+        .summary-messages-demo { padding: 1.5rem; }
+        .summary-item-demo { background: white; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.85rem; line-height: 1.5; }
+        .summary-conflict-demo { background: #fff3cd; border-left: 3px solid #ffc107; }
     </style>
     <script>
         function openJoinModal() {
@@ -422,27 +456,77 @@
                 <a onclick="openJoinModal()" class="btn-primary">Join the Beta Test →</a>
             </div>
             <div class="hero-animation">
-                <div class="lottie-container">
-                    <!-- Tangled/Chaos Animation -->
-                    <lottie-player 
-                        id="chaos-animation"
-                        class="lottie-animation active"
-                        src="https://lottie.host/28e0d4c9-6b63-4b9f-8f8c-a1f9e9d8c3f2/YhZkqBXEij.json"
-                        background="transparent"
-                        speed="1"
-                        loop
-                        autoplay>
-                    </lottie-player>
-                    <!-- Organized/Train System Animation -->
-                    <lottie-player 
-                        id="order-animation"
-                        class="lottie-animation"
-                        src="https://lottie.host/4d3e2a1f-8c7b-4a5e-9f1d-2b3c4d5e6f7a/TgXhYzIjKl.json"
-                        background="transparent"
-                        speed="1"
-                        loop
-                        autoplay>
-                    </lottie-player>
+                <div class="product-showcase">
+                    <div class="showcase-layer active" id="layer-inbox">
+                        <div class="email-inbox-demo">
+                            <div class="email-header">Inbox</div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">🎉 You're Invited! Emma's Birthday Party</div>
+                                <div class="email-preview">Join us for Emma's 7th birthday celebration...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">🦸 Dress Up Day Next Week</div>
+                                <div class="email-preview">Theme: Superheroes! Children can come dressed...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">💰 Swimming Lesson Payment Due</div>
+                                <div class="email-preview">£25 payment required by Friday...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">📋 Parent-Teacher Conference</div>
+                                <div class="email-preview">Schedule your appointment for next week...</div>
+                            </div>
+                            <div class="email-item-demo">
+                                <div class="email-subject">🏃 Sports Day Volunteer Request</div>
+                                <div class="email-preview">We need parent volunteers for sports day...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase-layer" id="layer-calendar">
+                        <div class="calendar-demo">
+                            <div class="calendar-header">This Week</div>
+                            <div class="week-header-demo">
+                                <div class="week-day-demo">Mon 10</div>
+                                <div class="week-day-demo">Tue 11</div>
+                                <div class="week-day-demo">Wed 12</div>
+                                <div class="week-day-demo">Thu 13</div>
+                                <div class="week-day-demo">Fri 14</div>
+                                <div class="week-day-demo">Sat 15</div>
+                            </div>
+                            <div class="calendar-events-demo">
+                                <div class="cal-event-demo event-dress-demo"><strong>Josefin:</strong> Dress Up Day</div>
+                                <div class="cal-event-demo event-birthday-demo"><strong>Josefin:</strong> Emma's Party</div>
+                                <div class="cal-event-demo event-payment-demo"><strong>Josefin:</strong> Swimming £25</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase-layer" id="layer-coordination">
+                        <div class="coordination-demo">
+                            <div class="coord-header">Coordinating...</div>
+                            <div class="coord-message">
+                                <div class="coord-to">To: Dad</div>
+                                <div class="coord-text">📅 Parent-teacher conference Wednesday 5pm - Can you attend?</div>
+                            </div>
+                            <div class="coord-message">
+                                <div class="coord-to">To: Sofia (Nanny)</div>
+                                <div class="coord-text">💬 Mum & Dad at conference tonight - feed kids with Wednesday's meal plan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase-layer" id="layer-summary">
+                        <div class="summary-demo">
+                            <div class="summary-header-demo">
+                                <div>Josefin</div>
+                                <div class="summary-status-demo">Your Daily Summary</div>
+                            </div>
+                            <div class="summary-messages-demo">
+                                <div class="summary-item-demo">📅 <strong>Today:</strong> Pickup at 3pm (Dad confirmed)</div>
+                                <div class="summary-item-demo">📋 <strong>Tomorrow:</strong> Permission slip due</div>
+                                <div class="summary-item-demo">💰 <strong>Friday:</strong> £25 swimming payment</div>
+                                <div class="summary-item-demo summary-conflict-demo">⚠️ <strong>Conflict:</strong> Conference overlaps with your 5pm meeting</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -541,7 +625,7 @@
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
                             <div class="day-cell">
-                                <div class="calendar-event event-dress">Dress Up Day<br>9am-3pm</div>
+                                <div class="calendar-event event-dress">Josefin: Dress Up Day<br>9am-3pm</div>
                             </div>
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
@@ -557,7 +641,7 @@
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
                             <div class="day-cell">
-                                <div class="calendar-event event-birthday">Emma's Party<br>12-2pm</div>
+                                <div class="calendar-event event-birthday">Josefin: Emma's Party<br>12-2pm</div>
                             </div>
                             <div class="day-cell"></div>
                         </div>
@@ -569,7 +653,7 @@
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
                             <div class="day-cell">
-                                <div class="calendar-event event-payment">Swimming<br>£25</div>
+                                <div class="calendar-event event-payment">Josefin: Swimming<br>£25</div>
                             </div>
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
