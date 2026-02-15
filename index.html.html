@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josefin - Your Household, Running on Autopilot</title>
+    <title>Josefin - The Household Operating System</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #8b4f47;
             --accent: #c9a961;
-            --cream: #faf8f5;
+            --cream: #ffffff;
             --warm-grey: #e8e6e1;
+            --brown: #4a2f2a;
             --charcoal: #2a2a2a;
             --deep-charcoal: #1a1a1a;
             --text-primary: #2a2a2a;
@@ -24,7 +25,7 @@
         h1 { font-size: clamp(2.75rem, 6vw, 4.5rem); margin-bottom: 2rem; }
         h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
 
-        nav { position: fixed; top: 0; width: 100%; background: rgba(250, 248, 245, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); z-index: 1000; padding: 1.5rem 0; }
+        nav { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); z-index: 1000; padding: 1.5rem 0; }
         .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--text-primary); text-decoration: none; font-style: italic; }
         .nav-cta { display: flex; gap: 1.5rem; align-items: center; }
@@ -33,18 +34,18 @@
         .nav-cta .btn-nav { padding: 0.75rem 2rem; background: var(--primary); color: var(--cream); border-radius: 8px; }
         .nav-cta .btn-nav:hover { background: var(--charcoal); transform: translateY(-1px); color: var(--cream); }
 
-        /* Hero with simplified transition placeholder */
-        .hero { min-height: 95vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; }
+        /* Hero */
+        .hero { min-height: 95vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; background: var(--cream); }
         .hero-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .hero-content { max-width: 600px; }
         .hero-label { font-size: 0.875rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--primary); font-weight: 600; margin-bottom: 1.5rem; }
-        .hero-title-line1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 0.5rem; line-height: 1.1; }
-        .hero-title-line2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 2rem; line-height: 1.1; }
+        .hero-title-line1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; line-height: 1.1; }
+        .hero-title-line2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem; line-height: 1.1; }
         .hero-description { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 3rem; line-height: 1.7; font-weight: 300; max-width: 550px; }
         .btn-primary { padding: 1.5rem 3.5rem; background: var(--primary); color: var(--cream); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; display: inline-block; border: 2px solid var(--primary); cursor: pointer; }
         .btn-primary:hover { background: var(--charcoal); border-color: var(--charcoal); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
 
-        /* Hero with Lottie animations */
+        /* Product Showcase Animation */
         .hero-animation { 
             display: flex; 
             align-items: center; 
@@ -52,23 +53,52 @@
             min-height: 500px;
             position: relative;
         }
-        .lottie-container {
-            width: 100%;
-            max-width: 400px;
-            height: 400px;
-            position: relative;
+        .product-showcase {
+            width: 100%; max-width: 450px; height: 500px; position: relative;
+            border-radius: 16px; background: white; box-shadow: 0 8px 32px rgba(0,0,0,0.12); overflow: hidden;
         }
-        .lottie-animation {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.5s ease;
+        .showcase-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transform: scale(0.95); transition: opacity 0.8s ease, transform 0.8s ease;
+            display: flex; align-items: center; justify-content: center; padding: 2rem; z-index: 1;
         }
-        .lottie-animation.active {
-            opacity: 1;
-        }
+        .showcase-layer.active { opacity: 1 !important; transform: scale(1) !important; z-index: 2; }
 
+        /* Showcase layer content styles */
+        .email-inbox-demo { width: 100%; background: #f8f9fa; border-radius: 12px; padding: 1rem; max-height: 450px; overflow: hidden; }
+        .email-header { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
+        .email-item-demo { background: white; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; border-left: 3px solid #8b4f47; }
+        .email-item-demo .email-subject { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; }
+        .email-item-demo .email-preview { font-size: 0.75rem; color: #6a6a6a; }
+        
+        .calendar-demo, .coordination-demo { width: 100%; background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid #e0ddd8; }
+        .calendar-header, .coord-header { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
+        .week-header-demo { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e8e6e1; }
+        .week-day-demo { text-align: center; font-size: 0.75rem; font-weight: 600; color: #6a6a6a; }
+        .calendar-hours-demo { display: grid; grid-template-rows: repeat(3, 80px); gap: 0; }
+        .hour-row-demo { display: grid; grid-template-columns: 50px repeat(6, 1fr); gap: 0.25rem; position: relative; }
+        .hour-label-demo { font-size: 0.7rem; color: #6a6a6a; padding: 0.5rem 0.5rem 0 0; text-align: right; }
+        .day-cell-demo { border-left: 1px solid #f0f0f0; position: relative; min-height: 80px; }
+        .calendar-event-demo { position: absolute; left: 2px; right: 2px; padding: 0.4rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; display: flex; align-items: center; justify-content: center; text-align: center; top: 0; height: 66%; }
+        .event-dress-demo { background: #fff3e0; color: #f57c00; }
+        .event-birthday-demo { background: #fce4ec; color: #c2185b; }
+        .event-payment-demo { background: #e3f2fd; color: #1976d2; }
+        
+        .coord-message { padding: 1rem; border-radius: 8px; background: #e8e6e1; border-left: 3px solid #8b4f47; margin-bottom: 0.75rem; }
+        .coord-to { font-size: 0.7rem; color: #6a6a6a; margin-bottom: 0.5rem; font-weight: 600; }
+        .coord-text { font-size: 0.85rem; font-weight: 500; line-height: 1.4; }
+        
+        .summary-demo-wrapper { width: 100%; }
+        .summary-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
+        .summary-demo { width: 100%; background: #e5ddd5; border-radius: 16px; overflow: hidden; }
+        .summary-header-demo { background: #075e54; padding: 1rem 1.5rem; color: white; }
+        .summary-header-demo div:first-child { font-weight: 600; font-size: 1rem; }
+        .summary-status-demo { font-size: 0.75rem; opacity: 0.8; }
+        .summary-messages-demo { padding: 1.5rem; }
+        .summary-item-demo { background: white; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.85rem; line-height: 1.5; }
+        .summary-conflict-demo { background: #fff3cd; border-left: 3px solid #ffc107; }
+
+        /* Integration Section (Brown) */
         .integration-section { 
             padding: 5rem 3rem; 
             background: #4a2f2a;
@@ -111,127 +141,21 @@
             background: white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
+            font-size: 2.5rem;
         }
-        .icon-circle svg { width: 50px; height: 50px; }
         .icon-circle:hover { transform: translateY(-5px); }
         .icon-label { font-size: 0.95rem; font-weight: 500; color: #ffffff; }
 
+        /* USP Sections */
         .section-container { max-width: 1400px; margin: 0 auto; }
-
         .usp-section { padding: 6rem 3rem; }
-        .usp-section:nth-child(even) { background: var(--warm-grey); }
-        .usp-section:nth-child(odd) { background: var(--cream); }
         .usp-container { max-width: 1200px; margin: 0 auto; }
         .usp-header { text-align: center; margin-bottom: 3rem; }
         .usp-label { font-size: 0.875rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--primary); font-weight: 600; margin-bottom: 1rem; }
         .usp-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
         .usp-description { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; max-width: 700px; margin: 0 auto; }
 
-        /* FIXED: Passive Capture with properly extended calendar events */
-        .capture-visual { display: grid; grid-template-columns: 45% 55%; gap: 3rem; margin-top: 3rem; align-items: start; }
-        .email-inbox { background: #f8f9fa; border-radius: 12px; padding: 1.5rem; border: 1px solid #e9ecef; }
-        .email-item { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; border-left: 3px solid var(--primary); }
-        .email-subject { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
-        .email-preview { font-size: 0.8rem; color: var(--text-secondary); }
-        
-        .calendar-week-view {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid var(--border-subtle);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        }
-        .week-header {
-            display: grid;
-            grid-template-columns: 60px repeat(7, 1fr);
-            gap: 0.25rem;
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--warm-grey);
-        }
-        .week-day {
-            text-align: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        .week-day-name { font-size: 0.65rem; display: block; }
-        .week-day-number { font-size: 0.85rem; display: block; }
-        
-        /* CRITICAL FIX: Proper grid structure for hour rows */
-        .calendar-hours {
-            display: grid;
-            grid-template-rows: repeat(3, 80px);
-            gap: 0;
-        }
-        .hour-row {
-            display: grid;
-            grid-template-columns: 60px repeat(7, 1fr);
-            gap: 0.25rem;
-            position: relative;
-        }
-        .hour-label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            padding: 0.5rem 0.5rem 0 0;
-            text-align: right;
-        }
-        .day-cell {
-            border-left: 1px solid #f0f0f0;
-            position: relative;
-            min-height: 80px;
-        }
-        
-        /* FIXED: Calendar events with proper positioning */
-        .calendar-event {
-            position: absolute;
-            left: 2px;
-            right: 2px;
-            padding: 0.4rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            opacity: 0;
-            animation: eventAppear 0.6s ease forwards;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        /* Dress Up Day: 9am-3pm (6 hours = spans all 3 rows in Wednesday) */
-        .event-dress {
-            background: #fff3e0;
-            color: #f57c00;
-            top: 0;
-            height: calc(300% + 0.5rem); /* Spans all 3 hour rows */
-            animation-delay: 0.8s;
-        }
-        
-        /* Emma's Party: 12pm-2pm (2 hours = 66% of one row in Saturday) */
-        .event-birthday {
-            background: #fce4ec;
-            color: #c2185b;
-            top: 0;
-            height: 66%;
-            animation-delay: 1.2s;
-        }
-        
-        /* Swimming Payment: 3pm (short reminder in Friday) */
-        .event-payment {
-            background: #e3f2fd;
-            color: #1976d2;
-            top: 0;
-            height: 40%;
-            animation-delay: 1.6s;
-        }
-        
-        @keyframes eventAppear {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Smart Coordination - FIXED */
+        /* Coordination Visual */
         .coordination-visual { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -279,15 +203,6 @@
             border-radius: 8px;
             border-left: 3px solid var(--primary);
             background: var(--warm-grey);
-            opacity: 0;
-            animation: notificationSlide 0.5s ease forwards;
-        }
-        .notification-item:nth-child(1) { animation-delay: 0.5s; }
-        .notification-item:nth-child(2) { animation-delay: 1s; }
-        .notification-item:nth-child(3) { animation-delay: 1.5s; }
-        @keyframes notificationSlide {
-            to { opacity: 1; }
-            from { opacity: 0; transform: translateX(-20px); }
         }
         .notification-to {
             font-size: 0.75rem;
@@ -302,122 +217,216 @@
             align-items: flex-start;
             gap: 0.5rem;
         }
-        .notification-icon {
-            font-size: 18px;
-            flex-shrink: 0;
-            margin-top: 2px;
+
+        /* Passive Capture */
+        .capture-visual { display: grid; grid-template-columns: 45% 55%; gap: 3rem; margin-top: 3rem; align-items: start; }
+        .email-inbox { background: #f8f9fa; border-radius: 12px; padding: 1.5rem; border: 1px solid #e9ecef; }
+        .email-item { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; border-left: 3px solid var(--primary); }
+        .email-subject { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .email-preview { font-size: 0.8rem; color: var(--text-secondary); }
+        
+        .calendar-week-view {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
-        .whatsapp-icon {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-            margin-top: 2px;
+        .week-header {
+            display: grid;
+            grid-template-columns: 60px repeat(7, 1fr);
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--warm-grey);
+        }
+        .week-day {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .week-day-name { font-size: 0.65rem; display: block; }
+        .week-day-number { font-size: 0.85rem; display: block; }
+        
+        .calendar-hours {
+            display: grid;
+            grid-template-rows: repeat(3, 80px);
+            gap: 0;
+        }
+        .hour-row {
+            display: grid;
+            grid-template-columns: 60px repeat(7, 1fr);
+            gap: 0.25rem;
+            position: relative;
+        }
+        .hour-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            padding: 0.5rem 0.5rem 0 0;
+            text-align: right;
+        }
+        .day-cell {
+            border-left: 1px solid #f0f0f0;
+            position: relative;
+            min-height: 80px;
+        }
+        
+        .calendar-event {
+            position: absolute;
+            left: 2px;
+            right: 2px;
+            padding: 0.4rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .event-dress {
+            background: #fff3e0;
+            color: #f57c00;
+            top: 0;
+            height: calc(300% + 0.5rem);
+        }
+        
+        .event-birthday {
+            background: #fce4ec;
+            color: #c2185b;
+            top: 0;
+            height: 66%;
+        }
+        
+        .event-payment {
+            background: #e3f2fd;
+            color: #1976d2;
+            top: 0;
+            height: 40%;
         }
 
+        /* Proactive Intelligence */
         .intelligence-visual { max-width: 400px; margin: 3rem auto 0; }
         .summary-container { background: #e5ddd5; border-radius: 16px; }
         .summary-header { background: #075e54; padding: 1rem 1.5rem; border-radius: 16px 16px 0 0; color: white; }
         .summary-contact { font-weight: 600; font-size: 1rem; }
         .summary-status { font-size: 0.8rem; opacity: 0.8; }
         .summary-messages { padding: 1.5rem; }
-        .summary-item { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; opacity: 0; animation: messageSlide 0.4s ease forwards; }
-        .summary-item:nth-child(1) { animation-delay: 0.5s; }
-        .summary-item:nth-child(2) { animation-delay: 0.9s; }
-        .summary-item:nth-child(3) { animation-delay: 1.3s; }
-        .summary-item:nth-child(4) { animation-delay: 1.7s; }
-        @keyframes messageSlide { to { opacity: 1; } from { opacity: 0; } }
+        .summary-item { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; }
         .summary-conflict { background: #fff3cd; border-left: 3px solid #ffc107; }
 
+        /* Why Josefin Section */
+        .why-josefin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+        .comparison-box, .differentiator-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-subtle);
+        }
+        .comparison-box h3, .differentiator-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        .comparison-box ul, .differentiator-box ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 1rem;
+        }
+        .comparison-box li {
+            padding: 0.75rem;
+            background: var(--warm-grey);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        .differentiator-box li {
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        .differentiator-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+        .testimonial-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .testimonial-author {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Final CTA */
         .final-cta { padding: 6rem 3rem; background: linear-gradient(135deg, var(--charcoal) 0%, var(--deep-charcoal) 100%); text-align: center; color: var(--cream); }
         .final-cta h2 { color: var(--cream); margin-bottom: 2rem; }
-        .final-cta p { font-size: 1.25rem; color: rgba(250, 248, 245, 0.8); margin-bottom: 3rem; font-weight: 300; }
+        .final-cta p { font-size: 1.25rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; font-weight: 300; }
         .final-cta .btn-primary { background: var(--cream); color: var(--charcoal); border-color: var(--cream); }
         .final-cta .btn-primary:hover { background: var(--primary); color: var(--cream); border-color: var(--primary); }
 
-        footer { background: #0d0d0d; color: rgba(250, 248, 245, 0.7); padding: 3rem; text-align: center; }
+        /* Footer */
+        footer { background: #0d0d0d; color: rgba(255, 255, 255, 0.7); padding: 3rem; text-align: center; }
         footer p { font-size: 0.875rem; }
         footer a { color: var(--accent); text-decoration: none; margin: 0 1rem; cursor: pointer; }
         footer a:hover { color: var(--cream); }
 
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
-        .modal.active { display: flex !important; display: flex; align-items: center; justify-content: center; }
+        .modal.active { display: flex !important; align-items: center; justify-content: center; }
         .modal-content { background: white; border-radius: 16px; padding: 3rem; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2rem; font-weight: 300; color: var(--text-secondary); cursor: pointer; transition: color 0.3s; }
         .modal-close:hover { color: var(--charcoal); }
         .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--primary); }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); font-size: 0.95rem; }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; font-family: 'Lato', sans-serif; font-size: 0.95rem; transition: border-color 0.3s; }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
-        .form-group textarea { min-height: 100px; resize: vertical; }
-        .checkbox-group { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1.5rem; }
-        .checkbox-group input[type="checkbox"] { margin-top: 0.25rem; width: 18px; height: 18px; cursor: pointer; }
-        .checkbox-group label { font-weight: 400; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; }
-        .btn-submit { width: 100%; padding: 1rem; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
-        .btn-submit:hover { background: var(--charcoal); transform: translateY(-1px); }
-        .success-message { display: none; text-align: center; padding: 2rem; }
-        .success-message.active { display: block; }
-        .success-message h3 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; }
-        .success-message p { color: var(--text-secondary); font-size: 1.1rem; }
 
+        /* Mobile */
         @media (max-width: 968px) {
             .hero-container { grid-template-columns: 1fr; }
             .hero-animation { display: none; }
             .capture-visual { grid-template-columns: 1fr; }
             .coordination-visual { grid-template-columns: 1fr; }
             .integration-icons { flex-direction: column; gap: 2rem; }
+            .why-josefin-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
             .nav-container { padding: 0 2rem; }
             .hero { padding: 7rem 2rem 3rem; }
             .modal-content { padding: 2rem; }
             .integration-text-box { padding: 2rem; }
         }
-
-        .product-showcase {
-            width: 100%; max-width: 450px; height: 500px; position: relative;
-            border-radius: 16px; background: white; box-shadow: 0 8px 32px rgba(0,0,0,0.12); overflow: hidden;
-        }
-        .showcase-layer {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; transform: scale(0.95); transition: opacity 0.8s ease, transform 0.8s ease;
-            display: flex; align-items: center; justify-content: center; padding: 2rem; z-index: 1;
-        }
-        .showcase-layer.active { opacity: 1 !important; transform: scale(1) !important; z-index: 2; }
-        .email-inbox-demo { width: 100%; background: #f8f9fa; border-radius: 12px; padding: 1rem; max-height: 450px; overflow: hidden; }
-        .email-header { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
-        .email-item-demo { background: white; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; border-left: 3px solid #8b4f47; }
-        .email-item-demo .email-subject { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; }
-        .email-item-demo .email-preview { font-size: 0.75rem; color: #6a6a6a; }
-        .calendar-demo, .coordination-demo { width: 100%; background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid #e0ddd8; }
-        .calendar-header, .coord-header { font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; color: #2a2a2a; }
-        .week-header-demo { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e8e6e1; }
-        .week-day-demo { text-align: center; font-size: 0.75rem; font-weight: 600; color: #6a6a6a; }
-        .calendar-events-demo { display: flex; flex-direction: column; gap: 0.75rem; }
-        .cal-event-demo { padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; }
-        .event-dress-demo { background: #fff3e0; color: #f57c00; }
-        .event-birthday-demo { background: #fce4ec; color: #c2185b; }
-        .event-payment-demo { background: #e3f2fd; color: #1976d2; }
-        .coord-message { padding: 1rem; border-radius: 8px; background: #e8e6e1; border-left: 3px solid #8b4f47; margin-bottom: 0.75rem; }
-        .coord-to { font-size: 0.7rem; color: #6a6a6a; margin-bottom: 0.5rem; font-weight: 600; }
-        .coord-text { font-size: 0.85rem; font-weight: 500; line-height: 1.4; }
-        
-        .summary-demo-wrapper { width: 100%; }
-        .summary-title {
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #2a2a2a;
-        }
-        .summary-demo { width: 100%; background: #e5ddd5; border-radius: 16px; overflow: hidden; }
-        .summary-header-demo { background: #075e54; padding: 1rem 1.5rem; color: white; }
-        .summary-header-demo div:first-child { font-weight: 600; font-size: 1rem; }
-        .summary-status-demo { font-size: 0.75rem; opacity: 0.8; }
-        .summary-messages-demo { padding: 1.5rem; }
-        .summary-item-demo { background: white; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.85rem; line-height: 1.5; }
-        .summary-conflict-demo { background: #fff3cd; border-left: 3px solid #ffc107; }
     </style>
     <script>
         function openJoinModal() {
-            // Direct redirect to Google Form
             window.open('https://docs.google.com/forms/d/e/1FAIpQLSet_qzpp4zMhPThNsDt0vicEB35oCxIJ-1qYkBJYX7JfyeudA/viewform', '_blank');
         }
         function closeJoinModal() {
@@ -434,11 +443,6 @@
         }
         function closeContactModal() {
             document.getElementById('contactModal').classList.remove('active');
-        }
-        function submitJoinForm(e) {
-            e.preventDefault();
-            alert('Form submitted! (Connect to Google Sheets)');
-            closeJoinModal();
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -465,13 +469,14 @@
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <p class="hero-label">THE HOUSEHOLD OPERATING SYSTEM FOR FAMILIES</p>
-                <h1 class="hero-title-line1">Your household, running on Autopilot.</h1>
-                <h1 class="hero-title-line2">You, finally ahead.</h1>
-                <p class="hero-description">School emails handled. Calendar invites scheduled. Family coordinated. The mental load, externalised.</p>
+                <p class="hero-label">THE HOUSEHOLD OPERATING SYSTEM FOR BUSY FAMILIES</p>
+                <h1 class="hero-title-line1">Multi-actor coordination.</h1>
+                <h1 class="hero-title-line2">Household running on autopilot. Nothing missed.</h1>
+                <p class="hero-description">Unlike personal assistants that help <em>you</em> manage better, Josefin helps <strong>your entire household</strong> coordinate better - you, your partner, babysitter, grandparent. We connect all dots.</p>
                 <a onclick="openJoinModal()" class="btn-primary">Join the Beta Test →</a>
             </div>
             <div class="hero-animation">
@@ -491,14 +496,6 @@
                                 <div class="email-subject">💰 Swimming Lesson Payment Due</div>
                                 <div class="email-preview">£25 payment required by Friday...</div>
                             </div>
-                            <div class="email-item-demo">
-                                <div class="email-subject">📋 Parent-Teacher Conference</div>
-                                <div class="email-preview">Schedule your appointment for next week...</div>
-                            </div>
-                            <div class="email-item-demo">
-                                <div class="email-subject">🏃 Sports Day Volunteer Request</div>
-                                <div class="email-preview">We need parent volunteers for sports day...</div>
-                            </div>
                         </div>
                     </div>
                     <div class="showcase-layer" id="layer-calendar">
@@ -514,7 +511,6 @@
                                 <div class="week-day-demo">Sat<br>15</div>
                             </div>
                             <div class="calendar-hours-demo">
-                                <!-- 9 AM Row -->
                                 <div class="hour-row-demo">
                                     <div class="hour-label-demo">9 AM</div>
                                     <div class="day-cell-demo"></div>
@@ -526,7 +522,6 @@
                                     <div class="day-cell-demo"></div>
                                     <div class="day-cell-demo"></div>
                                 </div>
-                                <!-- 12 PM Row -->
                                 <div class="hour-row-demo">
                                     <div class="hour-label-demo">12 PM</div>
                                     <div class="day-cell-demo"></div>
@@ -538,7 +533,6 @@
                                         <div class="calendar-event-demo event-birthday-demo"><strong>Josefin:</strong> Emma's Party<br><span style="font-size: 0.65rem; opacity: 0.8;">12-2pm</span></div>
                                     </div>
                                 </div>
-                                <!-- 3 PM Row -->
                                 <div class="hour-row-demo">
                                     <div class="hour-label-demo">3 PM</div>
                                     <div class="day-cell-demo"></div>
@@ -574,11 +568,12 @@
                                     <div>Josefin</div>
                                     <div class="summary-status-demo">Your Daily Summary</div>
                                 </div>
-                            <div class="summary-messages-demo">
-                                <div class="summary-item-demo">📅 <strong>Today:</strong> Pickup at 3pm (Dad confirmed)</div>
-                                <div class="summary-item-demo">📋 <strong>Tomorrow:</strong> Permission slip due</div>
-                                <div class="summary-item-demo">💰 <strong>Friday:</strong> £25 swimming payment</div>
-                                <div class="summary-item-demo summary-conflict-demo">⚠️ <strong>Conflict:</strong> Conference overlaps with your 5pm meeting</div>
+                                <div class="summary-messages-demo">
+                                    <div class="summary-item-demo">📅 <strong>Today:</strong> Pickup at 3pm (Dad confirmed)</div>
+                                    <div class="summary-item-demo">📋 <strong>Tomorrow:</strong> Permission slip due</div>
+                                    <div class="summary-item-demo">💰 <strong>Friday:</strong> £25 swimming payment</div>
+                                    <div class="summary-item-demo summary-conflict-demo">⚠️ <strong>Conflict:</strong> Conference overlaps with your 5pm meeting</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -587,65 +582,85 @@
         </div>
     </section>
 
+    <!-- INTEGRATION-FIRST INFRASTRUCTURE SECTION (Brown Background) -->
     <section class="integration-section">
         <div class="integration-content">
+            <p class="usp-label" style="color: var(--accent); margin-bottom: 1rem;">INTEGRATION-FIRST INFRASTRUCTURE</p>
+            <h2 style="color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem;">No app to download. No new tool to learn.</h2>
             <div class="integration-text-box">
-                <p class="integration-text">No new app. No dashboard you'll forget to check. Just the tools you already use, but smarter. <strong>We integrate directly into your email, your calendar, and your messenger tools - that's our command centre.</strong></p>
+                <p class="integration-text">We integrate directly into your email, calendar and messaging tools - that's our command centre. You don't change behaviour, we adapt to you.</p>
             </div>
             <div class="integration-icons">
                 <div class="integration-icon">
-                    <div class="icon-circle">
-                        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32.7 170.9L0 146.3V51.4l32.7 24.6z" fill="#4285F4"/>
-                            <path d="M256 51.4v94.9l-32.7-24.6V76z" fill="#34A853"/>
-                            <path d="M32.7 170.9l48.5 36.5h93.6l48.5-36.5V76L128 140.8 32.7 76z" fill="#EA4335"/>
-                            <path d="M256 51.4L128 140.8 0 51.4 32.7 14.9h190.6z" fill="#FBBC04"/>
-                            <path d="M0 51.4l32.7 24.6V76z" fill="#C5221F"/>
-                            <path d="M256 51.4L223.3 76v.7z" fill="#0F9D58"/>
-                        </svg>
-                    </div>
-                    <div class="icon-label">Gmail</div>
+                    <div class="icon-circle">📧</div>
+                    <div class="icon-label">Email</div>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; text-align: center; max-width: 200px;">Forward or auto-sync school messages</p>
                 </div>
                 <div class="integration-icon">
-                    <div class="icon-circle">
-                        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="256" height="256" rx="50" fill="#fff"/>
-                            <path d="M0 0h256v128H0z" fill="#4285F4"/>
-                            <path d="M256 128v128H0V128z" fill="#34A853"/>
-                            <path d="M256 0v128h-128V0z" fill="#FBBC04"/>
-                            <path d="M128 128v128H0V128z" fill="#34A853"/>
-                            <path d="M256 128v128l-128-64z" fill="#EA4335"/>
-                            <rect x="64" y="64" width="128" height="128" rx="8" fill="#fff"/>
-                            <text x="128" y="170" font-family="Arial, sans-serif" font-size="90" font-weight="bold" fill="#4285F4" text-anchor="middle">31</text>
-                        </svg>
-                    </div>
-                    <div class="icon-label">Google Calendar</div>
+                    <div class="icon-circle">📅</div>
+                    <div class="icon-label">Calendar</div>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; text-align: center; max-width: 200px;">We write events directly to Google, Apple, or Outlook</p>
                 </div>
                 <div class="integration-icon">
-                    <div class="icon-circle">
-                        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="whatsappGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#20B038;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#60D66A;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="128" cy="128" r="128" fill="url(#whatsappGradient)"/>
-                            <path d="M128 40c-48.6 0-88 39.4-88 88 0 15.6 4.1 30.2 11.3 42.9L40 216l46.4-11.1c12.3 6.7 26.4 10.5 41.4 10.5 48.6 0 88-39.4 88-88s-39.4-88-87.8-88zm50.7 124.9c-2.1 5.9-10.5 10.9-17.2 12.4-4.6.9-10.6 1.6-30.8-6.6-25.8-10.5-42.4-36.8-43.7-38.5-1.3-1.7-10.5-13.9-10.5-26.5s6.7-18.8 9-21.4c2.4-2.6 5.2-3.3 6.9-3.3 1.7 0 3.5 0 5 .1 1.6.1 3.8-.6 5.9 4.5 2.1 5.2 7.2 17.5 7.8 18.8.6 1.3 1 2.8.2 4.5-.8 1.7-1.2 2.8-2.4 4.3-1.2 1.5-2.5 3.4-3.6 4.5-1.2 1.3-2.5 2.7-1.1 5.3 1.4 2.6 6.3 10.4 13.5 16.8 9.3 8.3 17.1 10.9 19.5 12.1 2.4 1.2 3.8 1 5.2-.6 1.4-1.6 6-7 7.6-9.4 1.6-2.4 3.2-2 5.4-1.2s14.1 6.6 16.5 7.8 4 1.8 4.6 2.8c.6 1 .6 5.9-1.4 11.6z" fill="#fff"/>
-                        </svg>
-                    </div>
-                    <div class="icon-label">WhatsApp</div>
+                    <div class="icon-circle">💬</div>
+                    <div class="icon-label">WhatsApp/SMS</div>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; text-align: center; max-width: 200px;">Coordination happens in your messages</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="usp-section">
+    <!-- MULTI-ACTOR COORDINATION SECTION -->
+    <section class="usp-section" style="background: var(--cream);">
         <div class="usp-container">
             <div class="usp-header">
-                <p class="usp-label">Passive Capture</p>
-                <h2 class="usp-title">Information flows in automatically</h2>
-                <p class="usp-description">Forward school emails, WhatsApp invites, activity signups - or connect your inbox. Josefin extracts what matters: deadlines, payments, conflicts.</p>
+                <p class="usp-label">MULTI-ACTOR COORDINATION</p>
+                <h2 class="usp-title">Built-in coordination - shared visibility, minimal effort</h2>
+                <p class="usp-description">Not another assistant for Mum. A system that coordinates between everyone who helps. Everyone knows what's happening - no one plays messenger.</p>
+            </div>
+            <div class="coordination-visual">
+                <div class="calendar-event-card">
+                    <div class="event-card-title">Parent-Teacher Conference</div>
+                    <div class="event-card-details">
+                        <div class="event-detail-row">📅 Wednesday, Feb 19 • 5:00 PM</div>
+                        <div class="event-detail-row">📍 Pembroke Hall School</div>
+                        <div class="event-detail-row">👥 Both parents invited</div>
+                    </div>
+                </div>
+                <div class="notification-panel">
+                    <div class="notification-item">
+                        <div class="notification-to">To: Dad</div>
+                        <div class="notification-text">
+                            <span>📅</span>
+                            <span>Calendar invite sent: Parent-teacher conference Wednesday 5pm</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-to">To: Dad</div>
+                        <div class="notification-text">
+                            <span>💬</span>
+                            <span>Reminder: Parent-Teacher Conference in 1h at 5pm</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-to">To: Sofia (Nanny)</div>
+                        <div class="notification-text">
+                            <span>💬</span>
+                            <span>Reminder: Mum and Dad will be at the Parent-Teacher Conference tonight; please feed the kids with Wednesday's meal plan, and start bath time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PASSIVE CAPTURE SECTION -->
+    <section class="usp-section" style="background: var(--warm-grey);">
+        <div class="usp-container">
+            <div class="usp-header">
+                <p class="usp-label">PASSIVE CAPTURE</p>
+                <h2 class="usp-title">Event-Driven, Not Conversational - Information flows in automatically</h2>
+                <p class="usp-description">School sends multiple emails → Josefin extracts what is important → Syncs to Calendar and Routes to responsible person → Sends reminder → Confirms completion</p>
             </div>
             <div class="capture-visual">
                 <div class="email-inbox">
@@ -674,7 +689,6 @@
                         <div class="week-day"><span class="week-day-number">16</span></div>
                     </div>
                     <div class="calendar-hours">
-                        <!-- 9 AM Row -->
                         <div class="hour-row">
                             <div class="hour-label">9 AM</div>
                             <div class="day-cell"></div>
@@ -687,7 +701,6 @@
                             <div class="day-cell"></div>
                             <div class="day-cell"></div>
                         </div>
-                        <!-- 12 PM Row -->
                         <div class="hour-row">
                             <div class="hour-label">12 PM</div>
                             <div class="day-cell"></div>
@@ -700,7 +713,6 @@
                             </div>
                             <div class="day-cell"></div>
                         </div>
-                        <!-- 3 PM Row -->
                         <div class="hour-row">
                             <div class="hour-label">3 PM</div>
                             <div class="day-cell"></div>
@@ -716,62 +728,17 @@
                     </div>
                 </div>
             </div>
+            <p style="text-align: center; font-size: 1.15rem; color: var(--text-secondary); margin-top: 2rem; font-weight: 500;">No prompting needed. The system acts automatically.</p>
         </div>
     </section>
 
-    <section class="usp-section">
+    <!-- PROACTIVE INTELLIGENCE SECTION -->
+    <section class="usp-section" style="background: var(--cream);">
         <div class="usp-container">
             <div class="usp-header">
-                <p class="usp-label">Smart Coordination</p>
-                <h2 class="usp-title">Shared visibility, minimal effort</h2>
-                <p class="usp-description">Calendar invites for your partner. WhatsApp reminders for your nanny. Everyone knows what's happening - no one plays messenger.</p>
-            </div>
-            <div class="coordination-visual">
-                <div class="calendar-event-card">
-                    <div class="event-card-title">Parent-Teacher Conference</div>
-                    <div class="event-card-details">
-                        <div class="event-detail-row">📅 Wednesday, Feb 19 • 5:00 PM</div>
-                        <div class="event-detail-row">📍 Pembroke Hall School</div>
-                        <div class="event-detail-row">👥 Both parents invited</div>
-                    </div>
-                </div>
-                <div class="notification-panel">
-                    <div class="notification-item">
-                        <div class="notification-to">To: Dad</div>
-                        <div class="notification-text">
-                            <span class="notification-icon">📅</span>
-                            <span>Calendar invite sent: Parent-teacher conference Wednesday 5pm</span>
-                        </div>
-                    </div>
-                    <div class="notification-item">
-                        <div class="notification-to">To: Dad</div>
-                        <div class="notification-text">
-                            <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
-                            </svg>
-                            <span>Reminder: Parent-Teacher Conference in 1h at 5pm</span>
-                        </div>
-                    </div>
-                    <div class="notification-item">
-                        <div class="notification-to">To: Sofia (Nanny)</div>
-                        <div class="notification-text">
-                            <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
-                            </svg>
-                            <span>Reminder: Mum and Dad will be at the Parent-Teacher Conference tonight; please feed the kids with Wednesday's meal plan, and start bath time</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="usp-section">
-        <div class="usp-container">
-            <div class="usp-header">
-                <p class="usp-label">Proactive Intelligence</p>
+                <p class="usp-label">PROACTIVE INTELLIGENCE</p>
                 <h2 class="usp-title">See what's ahead before it arrives</h2>
-                <p class="usp-description">Daily summary. Conflict detection. Upcoming expenses flagged. You're never caught off-guard.</p>
+                <p class="usp-description">Daily summaries. Conflict detection. Upcoming payment deadlines flagged. You're never caught off-guard.</p>
             </div>
             <div class="intelligence-visual">
                 <div class="summary-container">
@@ -798,10 +765,68 @@
         </div>
     </section>
 
+    <!-- WHY JOSEFIN SECTION -->
+    <section class="usp-section" style="background: var(--warm-grey);">
+        <div class="usp-container">
+            <div class="usp-header">
+                <h2 class="usp-title">Why Josefin, Not Another Tool?</h2>
+            </div>
+            <div class="why-josefin-grid">
+                <div class="comparison-box">
+                    <h3>Other Tools</h3>
+                    <ul>
+                        <li>Calendar Apps</li>
+                        <li>Personal Assistants</li>
+                        <li>AI Productivity Agents</li>
+                    </ul>
+                </div>
+                <div class="differentiator-box">
+                    <h3>What makes Josefin different</h3>
+                    <ul>
+                        <li>Josefin meets you where you are - no app-first interface</li>
+                        <li>Josefin distributes the load and solves household coordination</li>
+                        <li>Josefin is event-driven and captures tasks automatically</li>
+                        <li>Josefin encourages voice prompt instructions</li>
+                        <li>Josefin ensures nothing falls through</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="usp-section" style="background: var(--cream);">
+        <div class="usp-container">
+            <div class="usp-header">
+                <h2 class="usp-title">What Families Say about Josefin</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-box">
+                    <p class="testimonial-text">"I love Josefin... I get daily reminders that are super useful"</p>
+                    <p class="testimonial-author">Father of 2</p>
+                </div>
+                <div class="testimonial-box">
+                    <p class="testimonial-text">"Thanks Josefin for already making our lives easier"</p>
+                    <p class="testimonial-author">Mother of 2</p>
+                </div>
+                <div class="testimonial-box">
+                    <p class="testimonial-text">"So grateful to have your help Josefin in my transition phase"</p>
+                    <p class="testimonial-author">Mother of 3</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
     <section class="final-cta" id="join">
         <div class="section-container">
-            <h2>Stop managing. Start living.</h2>
-            <p>Join the families currently testing Josefin.</p>
+            <h2>Join Families Testing Josefin</h2>
+            <p>8-week pilot. Prove multi-actor coordination works for your household.</p>
+            <p style="font-size: 1.1rem; margin: 1.5rem auto; max-width: 600px;">
+                ✓ You get the service free<br>
+                ✓ We get your honest feedback<br>
+                ✓ You help shape the product
+            </p>
             <a onclick="openJoinModal()" class="btn-primary">Join the Test →</a>
         </div>
     </section>
@@ -811,51 +836,6 @@
         <p style="margin-top: 1rem;"><a onclick="openContactModal()">Contact</a></p>
     </footer>
 
-    <!-- Join Modal -->
-    <div id="joinModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeJoinModal()">&times;</span>
-            <div id="joinForm">
-                <h2 class="modal-title">Join the Test</h2>
-                <form onsubmit="submitJoinForm(event)">
-                    <div class="form-group">
-                        <label for="join-name">Name</label>
-                        <input type="text" id="join-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-email">Email Address</label>
-                        <input type="email" id="join-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-location">Location</label>
-                        <textarea id="join-location" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-children">How many children do you have?</label>
-                        <textarea id="join-children" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-ages">What are their ages?</label>
-                        <textarea id="join-ages" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="join-manager">Who manages childcare currently?</label>
-                        <textarea id="join-manager" required></textarea>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="join-commitment" required>
-                        <label for="join-commitment">By signing up to this test, I am committing to a minimum 1 month pilot that will help to simplify my childcare coordination.</label>
-                    </div>
-                    <button type="submit" class="btn-submit">Submit</button>
-                </form>
-            </div>
-            <div id="joinSuccess" class="success-message">
-                <h3>✓ Thank you!</h3>
-                <p>Your response has been recorded.</p>
-            </div>
-        </div>
-    </div>
-
     <!-- Careers Modal -->
     <div id="careersModal" class="modal">
         <div class="modal-content">
@@ -863,7 +843,7 @@
             <div id="careersMessage">
                 <h2 class="modal-title">Join Josefin</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                    Like the sound of what we're building? We're hiring founding engineers. Please email your CV to <a href="/cdn-cgi/l/email-protection#a0c8c5cccccfe0cacfd3c5c6c9ce8ec1c9" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="acc4c9c0c0c3ecc6c3dfc9cac5c282cdc5">[email&#160;protected]</span></a>
+                    Like the sound of what we're building? We're hiring founding engineers. Please email your CV to <a href="/cdn-cgi/l/email-protection#48202d2424270822273b2d2e2126662921" style="color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="7e161b1212113e14110d1b181710501f17">[email&#160;protected]</span></a>
                 </p>
             </div>
         </div>
@@ -876,4 +856,4 @@
             <div id="contactMessage">
                 <h2 class="modal-title">Contact</h2>
                 <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
-                                        Please direct all enquiries to <a href="/cdn-cgi/l/email-protection#640c0108080b240e0b1701020d0a4a050d" color: var(--primary); text-decoration: none; font-weight: 600;"><span class="__cf_email__" data-cfemail="e189848d8d8ea18b8e928487888fcf8088">[email&#160;protected]</sp
+                    Please direct all enquiries to <a href="/cdn-cgi/l/email-protection#d1b9b4bdbdbe91bbbea2b4b7b8bfffb0b8" style="c
